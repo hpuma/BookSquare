@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginController">
    <children>
-      <VBox prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: WHITE;">
+      <VBox prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: WHITE;" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
          <children>
             <ImageView fitHeight="178.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,7 +30,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="usernameTextField" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
@@ -45,12 +44,12 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="passwordTextField" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane prefHeight="100.0" prefWidth="400.0">
                <children>
-                  <Button layoutX="25.0" layoutY="21.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="350.0" style="-fx-background-color: #7654FF;" text="Login" textFill="WHITE">
+                  <Button fx:id="LoginButton" layoutX="25.0" layoutY="21.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="350.0" style="-fx-background-color: #7654FF;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -59,7 +58,7 @@
             </Pane>
             <Pane prefHeight="90.0" prefWidth="400.0">
                <children>
-                  <Button alignment="BASELINE_LEFT" layoutX="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="Sign up for BookSquare" underline="true">
+                  <Button fx:id="SignUpButton" alignment="BASELINE_LEFT" layoutX="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="Sign up for BookSquare" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
