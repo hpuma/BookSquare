@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane fx:id="signUpWindow" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: plum;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignUpController">
+<AnchorPane fx:id="signUpWindow" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: plum;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
    <children>
       <VBox layoutY="6.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: WHITE;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="150.0">
          <children>
@@ -23,7 +23,7 @@
                <children>
                   <ImageView fitHeight="100.0" fitWidth="336.0" layoutX="66.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@bookSquare.png" />
+                        <Image url="@../images/bookSquare.png" />
                      </image>
                   </ImageView>
                </children>

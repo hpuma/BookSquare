@@ -1,3 +1,5 @@
+package controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,7 @@ public class SignUpController {
     @FXML
 //    Once the user signs up for an account, they will be taken to the home page.
     private void signUp(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("BookSquare.fxml"));
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
         signUpWindow.getChildren().setAll(p);
     }
 }

@@ -1,3 +1,5 @@
+package controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +15,13 @@ public class myDashboardController {
 
     @FXML
     void logOut(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/LogIn.fxml"));
         myDashboard.getChildren().setAll(p);
     }
 
     @FXML
     void newListing(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("newListing.fxml"));
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/newListing.fxml"));
         myDashboard.getChildren().setAll(p);
     }
 

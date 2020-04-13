@@ -57,7 +57,7 @@
                <children>
                   <ImageView fx:id="bookImage" fitHeight="400.0" fitWidth="700.0" layoutX="330.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@gettyimages-766410071-612x612.jpg" />
+                        <Image url="@../images/gettyimages-766410071-612x612.jpg" />
                      </image>
                   </ImageView>
                </children>
@@ -68,7 +68,7 @@
                      <children>
                         <ImageView fx:id="userImage" fitHeight="200.0" fitWidth="200.0" layoutX="25.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@default.jpeg" />
+                              <Image url="@../images/default.jpeg" />
                            </image>
                         </ImageView>
                      </children>

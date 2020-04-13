@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newListingController">
+<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.newListingController">
    <children>
       <HBox prefHeight="45.0" prefWidth="1200.0" style="-fx-background-color: #a947d0;">
          <children>
@@ -174,7 +174,7 @@
                      <children>
                         <ImageView fx:id="uploadImage" fitHeight="200.0" fitWidth="400.0" layoutX="165.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gettyimages-766410071-612x612.jpg" />
+                              <Image url="@../images/gettyimages-766410071-612x612.jpg" />
                            </image>
                         </ImageView>
                      </children>

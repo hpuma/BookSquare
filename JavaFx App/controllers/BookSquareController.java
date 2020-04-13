@@ -1,3 +1,4 @@
+package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +55,7 @@ public class BookSquareController {
     @FXML
 //    Opens up a new, smaller window showcasing more information about the book.
     void moreBookInfo(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("listingView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/pages/listingView.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -64,13 +65,13 @@ public class BookSquareController {
     @FXML
 //    Logs the user out, directing them back to the log in page.
     void logOut(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/LogIn.fxml"));
         homeWindow.getChildren().setAll(p);
     }
 
     @FXML
     void getDashboard(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("myDashboard.fxml"));
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
         homeWindow.getChildren().setAll(p);
     }
 }
