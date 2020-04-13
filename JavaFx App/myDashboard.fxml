@@ -17,8 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="myDashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myDashboardController">
    <children>
       <HBox prefHeight="45.0" prefWidth="1200.0" style="-fx-background-color: #a947d0;">
          <children>
@@ -41,7 +40,7 @@
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="logOutButton" mnemonicParsing="false" text="Log Out">
+            <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Log Out">
                <HBox.margin>
                   <Insets left="20.0" top="5.0" />
                </HBox.margin>
@@ -53,21 +52,21 @@
             </Button>
          </children>
       </HBox>
-      <SplitPane dividerPositions="0.40476190476190477" layoutY="42.0" orientation="VERTICAL" prefHeight="760.0" prefWidth="1200.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="254.0" prefWidth="1198.0">
+      <SplitPane dividerPositions="0.5" layoutY="42.0" orientation="VERTICAL" prefHeight="760.0" prefWidth="1200.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="254.0" prefWidth="1198.0">
                <children>
                   <HBox prefHeight="400.0" prefWidth="1200.0">
                      <children>
                         <GridPane prefHeight="357.0" prefWidth="1200.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="302.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="302.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
                               <Label prefHeight="93.0" prefWidth="752.0" text="My BookSquare Dashboard">
                                  <font>
@@ -79,7 +78,7 @@
                               </Label>
                               <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Button fx:id="addListingButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="396.0" layoutY="31.0" mnemonicParsing="false" style="-fx-background-color: #7654FF;" text="Add Listing" textFill="WHITE">
+                                    <Button fx:id="addListingButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="396.0" layoutY="31.0" mnemonicParsing="false" onAction="#newListing" style="-fx-background-color: #7654FF;" text="Add Listing" textFill="WHITE">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -137,8 +136,8 @@
                   </HBox>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-        </items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+         </items>
       </SplitPane>
    </children>
 </AnchorPane>
