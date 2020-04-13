@@ -1,66 +1,64 @@
-USE csc366;
+USE csc336; -- Name of the database
 
--- ListingID, ImageID, UserID, TimePosted, Status
+-- ListingID, UserID, ImageID, TimePosted, Status
 CREATE TABLE IF NOT EXISTS Listings (
     ListingID INT UNSIGNED,
-    PRIMARY KEY (ListingID),
-    ImageID INT UNSIGNED NOT NULL,
-    UserID INT UNSIGNED NOT NULL,
+    UserID INT UNSIGNED,
+    ImageID INT UNSIGNED,
     TimePosted TIMESTAMP,
-    Status BIT(1)
+    Status BIT(1), -- Switch for availible or not availible
+	PRIMARY KEY (ListingID,UserID,ImageID)
     );
 
--- ListingID, ISBN, Condition, Price
-CREATE TABLE IF NOT EXISTS Product(
+-- ListingID, ISBN, Condition, Price 
+CREATE TABLE IF NOT EXISTS Product (
     ListingID INT UNSIGNED,
-    PRIMARY KEY (ListingID),
     ISBN VARCHAR(255),
-    Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
-    Price DECIMAL
+    Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition, 1 worst .. 4 best
+    Price DECIMAL,
+    PRIMARY KEY (ListingID,ISBN)
 );
 
 -- ImageID, Size, Type
 CREATE TABLE IF NOT EXISTS ListingImage (
-    ImageID INT UNSIGNED,
-    PRIMARY KEY (ImageID),
-    imgsize INT UNSIGNED NOT NULL,
-    imgtype INT UNSIGNED NOT NULL,
-    Stat BIT(1)
+    ImageID INT,
+    ImgSrc VARCHAR(255), -- Path to the image in our C: drive
+    PRIMARY KEY (ImageID)
 );
-
--- ISBN, Title, Author
-CREATE TABLE IF NOT EXISTS Books(
-    ISBN VARCHAR(255),
-    PRIMARY KEY (ISBN),
-    Title VARCHAR(255) NOT NULL,
-    Author VARCHAR(255)
-);
-
--- UserID, FirstName, LastName, Phone, Email, Password
-CREATE TABLE IF NOT EXISTS Users(
-    UserID INT UNSIGNED AUTO_INCREMENT,
-    PRIMARY KEY (UserID),
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    Phone VARCHAR(255),
-    Email VARCHAR(255),
-    Pass VARCHAR(255)
-    );
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
 CREATE TABLE IF NOT EXISTS AuditLog (
     TransID INT UNSIGNED AUTO_INCREMENT,
-    PRIMARY KEY (TransID),
+    ListingID INT UNSIGNED,
     BuyerID INT UNSIGNED NOT NULL,
     SellerID INT UNSIGNED NOT NULL,
-    ListingID INT UNSIGNED NOT NULL,
-    TimeComplete TIMESTAMP
+    TimeComplete TIMESTAMP, -- Time of the transaction
+    PRIMARY KEY (TransID, ListingID)
+    );
+
+-- ISBN, Title, Author
+CREATE TABLE IF NOT EXISTS Books (
+    ISBN VARCHAR(255),
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(255),
+    PRIMARY KEY (ISBN)
+);
+
+-- UserID, FirstName, LastName, Phone, Email, Password
+CREATE TABLE IF NOT EXISTS Users (
+    UserID INT UNSIGNED AUTO_INCREMENT,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    Phone VARCHAR(255),
+    Email VARCHAR(255),
+    Pass VARCHAR(255),
+    PRIMARY KEY (UserID,Phone,Email)
     );
 
 -- UserID, Avatar, RegDate
 CREATE TABLE IF NOT EXISTS Profiles (
     UserID INT UNSIGNED,
-    PRIMARY KEY (UserID),
-    Avatar VARCHAR(255),
-    RegDate DATE
+    Avatar VARCHAR(255), -- ... Path to an image of the avatar C: drive to folder of avatar images
+    RegDate DATE,
+    PRIMARY KEY (UserID)
     );
