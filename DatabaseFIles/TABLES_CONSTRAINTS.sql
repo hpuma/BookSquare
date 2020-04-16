@@ -1,58 +1,58 @@
 USE csc336;
-
 -- ListingID, ImageID, UserID, TimePosted, Status
-CREATE TABLE IF NOT EXISTS Listings (
+CREATE TABLE IF NOT EXISTS Listings(
     ListingID INT,
     ImageID INT,
-    UserID INT UNSIGNED,
+    UserID INT,
     TimePosted TIMESTAMP,
     Status BIT(1),
+    INDEX(ImageID),
 	PRIMARY KEY (ListingID, UserID, ImageID)
     );
-
+    
+CREATE TABLE IF NOT EXISTS ListingImage(
+    ImageID INT,
+    ImgSrc VARCHAR(255),
+    PRIMARY KEY(ImageID,ImgSrc),
+	FOREIGN KEY(ImageID) REFERENCES Listings(ImageID)
+);
 -- ListingID, ISBN, Condition, Price .................................
-CREATE TABLE IF NOT EXISTS Product (
+CREATE TABLE IF NOT EXISTS Product(
     ListingID INT,
     ISBN VARCHAR(255),
-    Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
+    Cond INT, -- Use number codes for its condition
     Price DECIMAL,
-    PRIMARY KEY(ListingID,ISBN),
-	FOREIGN KEY(ListingID) REFERENCES Listings (ListingID)
+    INDEX(ISBN),
+    PRIMARY KEY(ListingID),
+	FOREIGN KEY(ListingID) REFERENCES Listings(ListingID)
 );
 
 -- ImageID, Size, Type
-CREATE TABLE IF NOT EXISTS ListingImage (
-    ImageID INT,
-    ImgSrc VARCHAR(255),
-    PRIMARY KEY(ImageID),
-	FOREIGN KEY(ImageID) REFERENCES Listings(ImageID)
-);
+
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
-CREATE TABLE IF NOT EXISTS AuditLog (
-    TransID INT UNSIGNED AUTO_INCREMENT,
-    BuyerID INT UNSIGNED NOT NULL,
-    SellerID INT UNSIGNED NOT NULL,
-    ListingID INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS AuditLog(
+    TransID INT,
+    BuyerID INT, 
+    SellerID INT,
+    ListingID INT,
     TimeComplete TIMESTAMP,
 	PRIMARY KEY (TransID, ListingID),
 	FOREIGN KEY (ListingID) REFERENCES Listings(ListingID)
     );
 
-
 -- ISBN, Title, Author
-CREATE TABLE IF NOT EXISTS Books (
+CREATE TABLE IF NOT EXISTS Books(
     ISBN VARCHAR(255),
     PRIMARY KEY (ISBN),
-    Title VARCHAR(255) NOT NULL,
+    Title VARCHAR(255),
     Author VARCHAR(255),
-	FOREIGN KEY (ISBN) REFERENCES Products(ISBN) -- ... EHH
+	FOREIGN KEY (ISBN) REFERENCES Product(ISBN) -- ... EHH
 );
 
-
 -- UserID, FirstName, LastName, Phone, Email, Password
-CREATE TABLE IF NOT EXISTS Users (
-    UserID INT UNSIGNED AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS Users(
+    UserID INT,
     FirstName VARCHAR(255),
     LastName VARCHAR(255),
     Phone VARCHAR(255),
@@ -61,10 +61,9 @@ CREATE TABLE IF NOT EXISTS Users (
 	PRIMARY KEY (UserID, Phone, Email)
     );
 
-
 -- UserID, Avatar, RegDate
-CREATE TABLE IF NOT EXISTS Profiles (
-    UserID INT UNSIGNED,
+CREATE TABLE IF NOT EXISTS Profiles(
+    UserID INT,
     Avatar VARCHAR(255), -- ... Path to an image
     RegDate DATE,
 	PRIMARY KEY (UserID),
