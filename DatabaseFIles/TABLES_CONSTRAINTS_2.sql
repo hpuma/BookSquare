@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS Product (
     Price DECIMAL,
     CONSTRAINT PRIMARY KEY (ListingID, ISBN),
     INDEX (ISBN),
-    CONSTRAINT FK_Product FOREIGN KEY (ListingID) 
-        REFERENCES Listings (ListingID)
+    FOREIGN KEY (ListingID) 
+    REFERENCES Listings (ListingID)
 );
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS AuditLog (
     SellerID INT UNSIGNED NOT NULL,
     ListingID INT UNSIGNED NOT NULL,
     TimeComplete TIMESTAMP,
-    CONSTRAINT PRIMARY KEY (TransID, ListingID),
-    CONSTRAINT FK_AuditLog FOREIGN KEY (ListingID) 
+    PRIMARY KEY (TransID, ListingID),
+    FOREIGN KEY (ListingID) 
 	REFERENCES Listings(ListingID)
     );
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS Books (
     Title VARCHAR(255) NOT NULL,
     Author VARCHAR(255),
     CONSTRAINT FK_Books FOREIGN KEY (ISBN)
-        REFERENCES Product(ISBN) -- ... EHH
+    REFERENCES Product(ISBN) -- ... EHH
 );
 
 
