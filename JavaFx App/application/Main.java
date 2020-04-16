@@ -3,13 +3,22 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
+
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws FileNotFoundException, SQLException {
+
+		executeScript e = new executeScript();
+		e.createTablesConstraints();
+//		e.createTables();
+//		e.deleteTables();
+
 		try {
 //            The login page will be the first that the user sees
 			Parent root = FXMLLoader.load(getClass().getResource("/pages/login.fxml"));
@@ -20,12 +29,14 @@ public class Main extends Application {
 
 			primaryStage.show();
 
-		} catch(Exception e) {
-			e.printStackTrace();
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	public static void main(String[] args) {launch(args); }
+
+
+
+
 }

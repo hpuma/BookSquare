@@ -1,6 +1,3 @@
-USE csc336; -- Name of the database
-
--- ListingID, UserID, ImageID, TimePosted, Status
 CREATE TABLE IF NOT EXISTS Listings (
     ListingID INT UNSIGNED,
     UserID INT UNSIGNED,
@@ -10,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Listings (
 	PRIMARY KEY (ListingID,UserID,ImageID)
     );
 
--- ListingID, ISBN, Condition, Price 
+-- ListingID, ISBN, Condition, Price
 CREATE TABLE IF NOT EXISTS Product (
     ListingID INT UNSIGNED,
     ISBN VARCHAR(255),

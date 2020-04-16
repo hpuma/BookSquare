@@ -1,15 +1,12 @@
-USE csc336;
-
--- ListingID, ImageID, UserID, TimePosted, Status
-CREATE TABLE IF NOT EXISTS Listings (
-    ListingID INT UNSIGNED,
-    ImageID INT UNSIGNED,
-    UserID INT UNSIGNED,
-    TimePosted TIMESTAMP,
-    Status BIT(1),
-    PRIMARY KEY (ListingID, UserID, ImageID),
-    INDEX (ImageID)
-    );
+-- CREATE TABLE IF NOT EXISTS Listings (
+--     ListingID INT UNSIGNED,
+--     ImageID INT UNSIGNED,
+--     UserID INT UNSIGNED,
+--     TimePosted TIMESTAMP,
+--     Status BIT(1),
+--     PRIMARY KEY (ListingID, UserID, ImageID),
+--     INDEX (ImageID)
+--     );
 
 -- ImageID, Size, Type
 CREATE TABLE IF NOT EXISTS ListingImage (
@@ -19,16 +16,16 @@ CREATE TABLE IF NOT EXISTS ListingImage (
 	ON DELETE CASCADE
 );
 
--- ListingID, ISBN, Condition, Price .................................
-CREATE TABLE IF NOT EXISTS Product (
-    ListingID INT UNSIGNED,
-    ISBN VARCHAR(255),
-    Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
-    Price DECIMAL UNSIGNED,
-    PRIMARY KEY (ListingID, ISBN),
-    INDEX (ISBN),
-    FOREIGN KEY (ListingID) REFERENCES Listings (ListingID)
-);
+-- -- ListingID, ISBN, Condition, Price .................................
+-- CREATE TABLE IF NOT EXISTS Product (
+--     ListingID INT UNSIGNED,
+--     ISBN VARCHAR(255),
+--     Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
+--     Price DECIMAL UNSIGNED,
+--     PRIMARY KEY (ListingID, ISBN),
+--     INDEX (ISBN),
+--     FOREIGN KEY (ListingID) REFERENCES Listings (ListingID)
+-- );
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
 CREATE TABLE IF NOT EXISTS AuditLog (
@@ -42,13 +39,13 @@ CREATE TABLE IF NOT EXISTS AuditLog (
     );
 
 -- ISBN, Title, Author
-CREATE TABLE IF NOT EXISTS Books (
-    ISBN VARCHAR(255),
-    PRIMARY KEY (ISBN),
-    Title VARCHAR(255) NOT NULL,
-    Author VARCHAR(255),
-    FOREIGN KEY (ISBN) REFERENCES Product(ISBN) -- ... EHH
-);
+-- CREATE TABLE IF NOT EXISTS Books (
+--     ISBN VARCHAR(255),
+--     PRIMARY KEY (ISBN),
+--     Title VARCHAR(255) NOT NULL,
+--     Author VARCHAR(255),
+--     FOREIGN KEY (ISBN) REFERENCES Product(ISBN) -- ... EHH
+-- );
 
 -- UserID, FirstName, LastName, Phone, Email, Password
 CREATE TABLE IF NOT EXISTS Users (
