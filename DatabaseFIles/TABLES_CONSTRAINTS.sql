@@ -2,8 +2,8 @@ USE csc336;
 
 -- ListingID, ImageID, UserID, TimePosted, Status
 CREATE TABLE IF NOT EXISTS Listings (
-    ListingID INT UNSIGNED,
-    ImageID INT UNSIGNED,
+    ListingID INT,
+    ImageID INT,
     UserID INT UNSIGNED,
     TimePosted TIMESTAMP,
     Status BIT(1),
@@ -12,21 +12,20 @@ CREATE TABLE IF NOT EXISTS Listings (
 
 -- ListingID, ISBN, Condition, Price .................................
 CREATE TABLE IF NOT EXISTS Product (
-    ListingID INT UNSIGNED,
+    ListingID INT,
     ISBN VARCHAR(255),
     Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
     Price DECIMAL,
-    PRIMARY KEY (ListingID,ISBN),
-    CONSTRAINT FK_Product FOREIGN KEY (ListingID) 
-    REFERENCES Listings (ListingID)
+    PRIMARY KEY(ListingID,ISBN),
+	FOREIGN KEY(ListingID) REFERENCES Listings (ListingID)
 );
 
 -- ImageID, Size, Type
 CREATE TABLE IF NOT EXISTS ListingImage (
     ImageID INT,
     ImgSrc VARCHAR(255),
-    PRIMARY KEY (ImageID),
-    CONSTRAINT FK_ListingImage FOREIGN KEY (ImageID) REFERENCES Listings(ImageID)
+    PRIMARY KEY(ImageID),
+	FOREIGN KEY(ImageID) REFERENCES Listings(ImageID)
 );
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
@@ -36,9 +35,8 @@ CREATE TABLE IF NOT EXISTS AuditLog (
     SellerID INT UNSIGNED NOT NULL,
     ListingID INT UNSIGNED NOT NULL,
     TimeComplete TIMESTAMP,
-    CONSTRAINT PK_AuditLog PRIMARY KEY (TransID, ListingID),
-    CONSTRAINT FK_AuditLog FOREIGN KEY (ListingID) 
-    REFERENCES PK_Listings(ListingID)
+	PRIMARY KEY (TransID, ListingID),
+	FOREIGN KEY (ListingID) REFERENCES Listings(ListingID)
     );
 
 
@@ -48,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Books (
     PRIMARY KEY (ISBN),
     Title VARCHAR(255) NOT NULL,
     Author VARCHAR(255),
-    CONSTRAINT FK_Books FOREIGN KEY (ISBN) REFERENCES Products(ISBN) -- ... EHH
+	FOREIGN KEY (ISBN) REFERENCES Products(ISBN) -- ... EHH
 );
 
 
@@ -60,15 +58,15 @@ CREATE TABLE IF NOT EXISTS Users (
     Phone VARCHAR(255),
     Email VARCHAR(255),
     Pass VARCHAR(255),
-    CONSTRAINT PK_Users PRIMARY KEY (UserID, Phone, Email)
+	PRIMARY KEY (UserID, Phone, Email)
     );
 
 
 -- UserID, Avatar, RegDate
 CREATE TABLE IF NOT EXISTS Profiles (
     UserID INT UNSIGNED,
-    PRIMARY KEY (UserID),
     Avatar VARCHAR(255), -- ... Path to an image
     RegDate DATE,
-    CONSTRAINT PK_Profiles PRIMARY KEY (UserID) REFERENCES Users(UserID)
+	PRIMARY KEY (UserID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
     );
