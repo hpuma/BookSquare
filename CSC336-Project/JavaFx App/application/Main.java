@@ -17,7 +17,7 @@ public class Main extends Application {
 		executeScript e = new executeScript();
 		e.createTablesConstraints();
 //		e.createTables();
-//		e.deleteTables();
+		e.deleteTables();
 
 		try {
 //            The login page will be the first that the user sees
