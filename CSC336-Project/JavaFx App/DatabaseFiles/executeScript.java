@@ -14,7 +14,7 @@ public class executeScript {
         Connection c = dbConnection.connect();
         ScriptRunner sr = new ScriptRunner(c);
         sr.setEscapeProcessing(false);
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\julia\\Documents\\GitHub\\CSC336-Project\\CSC336-Project\\JavaFx App\\DatabaseFiles\\CREATE_TABLES.sql"));
+        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\DatabaseFiles\\CREATE_TABLES.sql"));
         sr.runScript(reader);
 
 //        c.close();
@@ -24,7 +24,7 @@ public class executeScript {
         Connection c = dbConnection.connect();
         ScriptRunner sr = new ScriptRunner(c);
         sr.setEscapeProcessing(false);
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\julia\\Documents\\GitHub\\CSC336-Project\\CSC336-Project\\DatabaseFIles\\TABLES_CONSTRAINTS.sql"));
+        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\DatabaseFiles\\TABLES_CONSTRAINTS.sql"));
         sr.runScript(reader);
 
 //        c.close();
@@ -36,7 +36,7 @@ public class executeScript {
         Connection c = dbConnection.connect();
         ScriptRunner sr = new ScriptRunner(c);
         sr.setEscapeProcessing(false);
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\julia\\Documents\\GitHub\\CSC336-Project\\CSC336-Project\\DatabaseFIles\\DELETE_TABLES.sql"));
+        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\DatabaseFiles\\DELETE_TABLES.sql"));
         sr.runScript(reader);
 
         c.close();

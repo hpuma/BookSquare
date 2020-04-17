@@ -13,7 +13,7 @@ public class dbConnection {
         if (con == null) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\julia\\Documents\\GitHub\\CSC336-Project\\CSC336-Project\\DatabaseFIles\\BookSquare.db");
+                con = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.dir") + "\\DatabaseFiles\\BookSquare.db");
                 System.out.println("Connection established");
             } catch (ClassNotFoundException | SQLException e) {
                 // TODO Auto-generated catch block
