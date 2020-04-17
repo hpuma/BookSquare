@@ -10,5 +10,5 @@ CSC 336 Project 1: Peter, Daniel, Julia and Henry
 #### If you are having issues with your modules, follow these steps:
 - Go to "Run" tab.
 - Click on "Edit Configurations".
-- In VM Options, type in: "--module-path "C:\Users\'your path'\javafx-sdk-14\lib" --add-modules=javafx.controls,javafx.fxml,javafx.graphics"
+- In VM Options, type in: "--module-path "C:\Users\ -your path- \javafx-sdk-14\lib" --add-modules=javafx.controls,javafx.fxml,javafx.graphics"
 - Click 'Apply' and 'Ok'.
