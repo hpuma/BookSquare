@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS Listings (
     TimePosted TIMESTAMP,
     Status BIT(1), -- Switch for availible or not availible
 	PRIMARY KEY (ListingID,UserID,ImageID)
-    );
+);
 
 -- ListingID, ISBN, Condition, Price
 CREATE TABLE IF NOT EXISTS Product (
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS AuditLog (
     SellerID INT UNSIGNED NOT NULL,
     TimeComplete TIMESTAMP, -- Time of the transaction
     PRIMARY KEY (TransID, ListingID)
-    );
+);
 
 -- ISBN, Title, Author
 CREATE TABLE IF NOT EXISTS Books (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Users (
     Email VARCHAR(255),
     Pass VARCHAR(255),
     PRIMARY KEY (UserID,Phone,Email)
-    );
+);
 
 -- UserID, Avatar, RegDate
 CREATE TABLE IF NOT EXISTS Profiles (
@@ -58,4 +58,4 @@ CREATE TABLE IF NOT EXISTS Profiles (
     Avatar VARCHAR(255), -- ... Path to an image of the avatar C: drive to folder of avatar images
     RegDate DATE,
     PRIMARY KEY (UserID)
-    );
+);

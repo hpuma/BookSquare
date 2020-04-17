@@ -1,5 +1,4 @@
 package application;
-
 import DatabaseFiles.executeScript;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,6 @@ public class Main extends Application {
 		e.createTablesConstraints();
 //		e.createTables();
 		e.deleteTables();
-
 
 		try {
 //            The login page will be the first that the user sees
