@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Users (
 -- UserID, Avatar, RegDate
 CREATE TABLE IF NOT EXISTS Profiles (
    UserID INT UNSIGNED,
-   Avatar VARCHAR(255), -- ... Path to an image
+   Avatar VARCHAR(255),
    RegDate DATE,
    PRIMARY KEY(UserID),
    FOREIGN KEY(UserID) REFERENCES Users(UserID)
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS ListingImage (
 CREATE TABLE IF NOT EXISTS Product (
 	ISBN VARCHAR(255),
 	ListingID INT UNSIGNED NOT NULL,
-	Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
+	Cond INT UNSIGNED NOT NULL,
 	Price DECIMAL UNSIGNED NOT NULL,
 	PRIMARY KEY(ISBN),
 	FOREIGN KEY(ListingID) REFERENCES Listings(ListingID)
