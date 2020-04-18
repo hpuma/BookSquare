@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Declare this object when checking for valid users.
+//How to declare this object: Login_Obj login = new Login_Obj();
 public class Login_Obj {
     Connection c;
 
@@ -16,7 +18,8 @@ public class Login_Obj {
     public boolean valid_connection(){
         return  this.c !=null;
     }
-
+    
+    //Returns True if entry/user account exists in the database.
     public boolean valid_login(String email, String password)throws Exception{
         PreparedStatement p = null;
         ResultSet r = null;
