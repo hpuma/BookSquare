@@ -1,5 +1,5 @@
 -- UserID, FirstName, LastName, Phone, Email, Password
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
    UserID INT UNSIGNED AUTO_INCREMENT,
    FirstName VARCHAR(255) NOT NULL,
    LastName VARCHAR(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Users (
 );
 
 -- UserID, Avatar, RegDate
-CREATE TABLE Profiles (
+CREATE TABLE IF NOT EXISTS Profiles (
    UserID INT UNSIGNED,
    Avatar VARCHAR(255), -- ... Path to an image
    RegDate DATE,
@@ -20,7 +20,7 @@ CREATE TABLE Profiles (
 );
 
 -- ListingID, ImageID, UserID, TimePosted, Status
-CREATE TABLE Listings (
+CREATE TABLE IF NOT EXISTS Listings (
 	ListingID INT UNSIGNED,
 	ImageID INT UNSIGNED NOT NULL UNIQUE,
 	UserID INT UNSIGNED,
@@ -32,7 +32,7 @@ CREATE TABLE Listings (
 );
 
 -- ImageID, Size, Type
-CREATE TABLE ListingImage (
+CREATE TABLE IF NOT EXISTS ListingImage (
    ImageID INT UNSIGNED PRIMARY KEY,
    ImageSrc VARCHAR(255) NOT NULL,
    FOREIGN KEY(ImageID) REFERENCES Listings(ImageID)
@@ -40,7 +40,7 @@ CREATE TABLE ListingImage (
 );
 
 -- ListingID, ISBN, Condition, Price .................................
-CREATE TABLE Product (
+CREATE TABLE IF NOT EXISTS Product (
 	ISBN VARCHAR(255),
 	ListingID INT UNSIGNED NOT NULL,
 	Cond INT UNSIGNED NOT NULL, -- Use number codes for its condition
@@ -51,7 +51,7 @@ CREATE TABLE Product (
 );
 
 -- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
-CREATE TABLE AuditLog (
+CREATE TABLE IF NOT EXISTS AuditLog (
    TransID INT UNSIGNED AUTO_INCREMENT,
    ListingID INT UNSIGNED,
    SellerID INT UNSIGNED NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE AuditLog (
 );
 
 --ISBN Title Author
-CREATE TABLE Books (
+CREATE TABLE IF NOT EXISTS Books (
    ISBN VARCHAR(255),
    Title VARCHAR(255) NOT NULL,
    Author VARCHAR(255),
