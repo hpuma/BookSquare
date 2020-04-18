@@ -33,7 +33,7 @@ public class Main extends Application {
 //		  i.insertUsers(50005, "j", "b", "100064", "@0115@", "pass");
 //        i.insertProfiles(1200, "me", d);
 //        i.insertProduct("123", 123, 1, 1.5);
-		i.insertAuditLog(12310, 41506, 78109, 61098, time);
+		i.insertAuditLog(121310, 415106, 781109, 610918, time);
 
 
 
