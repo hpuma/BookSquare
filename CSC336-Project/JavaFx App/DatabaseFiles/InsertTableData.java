@@ -2,6 +2,7 @@ package DatabaseFiles;
 
 import java.sql.*;
 
+// This should be implemented with the "new listing" page
 public class InsertTableData {
 
 

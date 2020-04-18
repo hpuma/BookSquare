@@ -36,9 +36,8 @@ public class executeScript {
                     st.execute(line);
                 }
             }
-        }
-        finally{
-            if (st != null){
+        } finally {
+            if (st != null) {
                 st.close();
             }
         }
@@ -52,7 +51,6 @@ public class executeScript {
 
 //        c.close();
     }
-
 
 
     public void deleteTables() throws FileNotFoundException, SQLException {
