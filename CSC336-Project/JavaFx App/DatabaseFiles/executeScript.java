@@ -18,10 +18,6 @@ public class executeScript {
         s.useDelimiter("/\\*[\\s\\S]*?\\*/|--[^\\r\\n]*|;");
 
         Connection c = dbConnection.connect();
-//        ScriptRunner sr = new ScriptRunner(c);
-//        sr.setEscapeProcessing(false);
-//        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\DatabaseFiles\\TABLES_CONSTRAINTS.sql"));
-//        StringBuffer sb = new StringBuffer();
         Statement st = null;
 
         try {
@@ -41,16 +37,9 @@ public class executeScript {
                 st.close();
             }
         }
-//        String s;
-//        while ((s = reader.readLine()) != null){
-//            st.execute(s);
-//        }
-//
-//
-//        sr.runScript(reader);
 
-//        c.close();
     }
+
 
 
     public void deleteTables() throws FileNotFoundException, SQLException {

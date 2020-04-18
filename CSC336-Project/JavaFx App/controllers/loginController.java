@@ -22,6 +22,7 @@ public class loginController {
     @FXML
 //    If the user does not have an account, they will be directed to the sign up page.
     private void signUp(ActionEvent e) throws IOException {
+
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/SignUp.fxml"));
         logInWindow.getChildren().setAll(p);
     }

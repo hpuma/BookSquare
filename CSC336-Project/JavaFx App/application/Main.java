@@ -28,6 +28,7 @@ public class Main extends Application {
 		InsertTableData i = new InsertTableData();
 		java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 
+
 //        i.insertBooks("1210", "Clifford", "Peter Ye");
 //        i.insertListings(1231, 55, 0123, time, true );
 //		  i.insertImage(1011, "myDog");
@@ -36,16 +37,13 @@ public class Main extends Application {
 //        i.insertProduct("123", 123, 1, 1.5);
 //		i.insertAuditLog(121310, 415106, 781109, 610918, time);
 
-		DeleteTableData del = new DeleteTableData();
+//		DeleteTableData del = new DeleteTableData();
 //		Tables Product and Books are deleted specifying the Table and the ISBN (Primary Key). Make sure they are correct.
 //		del.delProductsBooks("Books", "1210");
 //		del.delProductsBooks("Product", "123");
 
 //		All other tables are deleted by specifying the Table, Primary Key and value. Make sure they are correct.
-		del.delData("ListingImage", "ImageID", 1011);
-
-
-
+//		del.delData("ListingImage", "ImageID", 1011);
 
 
 //		e.deleteTables();

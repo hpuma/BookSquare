@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="signUpWindow" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: plum;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
    <children>
       <VBox layoutY="6.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: WHITE;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="150.0">
@@ -39,7 +38,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="userID" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane prefHeight="30.0" prefWidth="400.0">
@@ -53,7 +52,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="firstName" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane prefHeight="30.0" prefWidth="400.0">
@@ -67,7 +66,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="lastName" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <GridPane>
@@ -90,7 +89,7 @@
                   </Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField layoutX="25.0" layoutY="4.0" prefHeight="31.0" prefWidth="195.0" />
+                        <TextField fx:id="email" layoutX="25.0" layoutY="4.0" prefHeight="31.0" prefWidth="195.0" />
                      </children>
                   </Pane>
                   <Label text="Phone" GridPane.columnIndex="1">
@@ -100,7 +99,7 @@
                   </Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField layoutX="-2.0" layoutY="3.0" prefHeight="31.0" prefWidth="150.0" />
+                        <TextField fx:id="phone" layoutX="-2.0" layoutY="3.0" prefHeight="31.0" prefWidth="150.0" />
                      </children>
                   </Pane>
                </children>
@@ -116,7 +115,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="pass" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane prefHeight="60.0" prefWidth="400.0">
