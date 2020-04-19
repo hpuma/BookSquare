@@ -27,8 +27,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-
-public class BookSquareController implements Initializable{
+public class BookSquareController implements Initializable {
     public String currUserEmail;
     public String currUserPassword;
 
@@ -86,7 +85,7 @@ public class BookSquareController implements Initializable{
     private VBox homeWindow;
 //    private
 
-    public void getLoginInfo(String email, String password){
+    public void getLoginInfo(String email, String password) {
         currUserEmail = email;
         currUserPassword = password;
         System.out.println(currUserEmail);
@@ -121,60 +120,47 @@ public class BookSquareController implements Initializable{
     @FXML
     void getDashboard(ActionEvent e) throws IOException {
 //Julias way
-//        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
-//        homeWindow.getChildren().setAll(p);
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/myDashboard.fxml"));//load to next page
-            Parent root = (Parent) loader.load();
-            Stage stage = new Stage();
-            myDashboardController myDashboardController = loader.getController();//obtain login info to bring to next controller
-            //BookSquareController.getLoginInfo(email, password);
-            myDashboardController.setUserEmail(currUserEmail);
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
+        homeWindow.getChildren().setAll(p);
 
 //            CALLING GETTER METHOD IN loginController class to retrieve user's email from ANYWHERE.
 //            IT IS CALLED IN THE FOLLOWING PRINT STATEMENT:
-            System.out.println("This is the user's email: " + loginController.getUserEmail());
+        System.out.println("This is the user's email: " + loginController.getUserEmail());
 
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException io){
-            Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
-            stageToClose.close();
-        }
     }
 
-    private SortToggle tog = new SortToggle(0,0,0);
+
+    private SortToggle tog = new SortToggle(0, 0, 0);
 
     @FXML
-    public void change_price(){
-        if(this.priceGroup.getSelectedToggle().equals(this.low_p)){
+    public void change_price() {
+        if (this.priceGroup.getSelectedToggle().equals(this.low_p)) {
             this.tog.setPrice(1);
         }
-        if(this.priceGroup.getSelectedToggle().equals(this.high_p)){
+        if (this.priceGroup.getSelectedToggle().equals(this.high_p)) {
             this.tog.setPrice(2);
         }
     }
 
     @FXML
-    public void change_con(){
-        if(this.conditionGroup.getSelectedToggle().equals(this.good_con)){
+    public void change_con() {
+        if (this.conditionGroup.getSelectedToggle().equals(this.good_con)) {
             this.tog.setCondition(2);
         }
-        if(this.conditionGroup.getSelectedToggle().equals(this.new_con)){
+        if (this.conditionGroup.getSelectedToggle().equals(this.new_con)) {
             this.tog.setCondition(3);
         }
-        if(this.conditionGroup.getSelectedToggle().equals(this.accept_con)){
+        if (this.conditionGroup.getSelectedToggle().equals(this.accept_con)) {
             this.tog.setCondition(1);
         }
     }
 
     @FXML
-    public void change_time(){
-        if(this.timeGroup.getSelectedToggle().equals(this.old_time)){
+    public void change_time() {
+        if (this.timeGroup.getSelectedToggle().equals(this.old_time)) {
             this.tog.setCondition(1);
         }
-        if(this.timeGroup.getSelectedToggle().equals(this.new_time)){
+        if (this.timeGroup.getSelectedToggle().equals(this.new_time)) {
             this.tog.setCondition(2);
         }
     }
@@ -227,13 +213,13 @@ public class BookSquareController implements Initializable{
 
     private ObservableList<ProductListing> data;
 
-    private String toggle_query(SortToggle togg){
+    private String toggle_query(SortToggle togg) {
         String sql = "SELECT Listings.ListingID, ListingImage.ListingID AS ImageID, Product.Price, Books.ISBN, Books.Title, Product.Cond, Listings.TimePosted, Listings.Status FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID";
-        switch(togg.getPrice()){
+        switch (togg.getPrice()) {
             case 0:
-                switch (togg.getCondition()){
+                switch (togg.getCondition()) {
                     case 0:
-                        switch (togg.getTime()){
+                        switch (togg.getTime()) {
                             case 0:
                                 sql = sql.concat(";");
                                 break;
@@ -245,7 +231,7 @@ public class BookSquareController implements Initializable{
                                 break;
                         }
                     case 1:
-                        switch (togg.getTime()){
+                        switch (togg.getTime()) {
                             case 0:
                                 sql = sql.concat(" AND Product.Cond = 0;");
                                 break;
@@ -257,7 +243,7 @@ public class BookSquareController implements Initializable{
                                 break;
                         }
                     case 2:
-                        switch (togg.getTime()){
+                        switch (togg.getTime()) {
                             case 0:
                                 sql = sql.concat(" AND Product.Cond = 1;");
                                 break;
@@ -269,7 +255,7 @@ public class BookSquareController implements Initializable{
                                 break;
                         }
                     case 3:
-                        switch (togg.getTime()){
+                        switch (togg.getTime()) {
                             case 0:
                                 sql = sql.concat(" AND Product.Cond = 2;");
                                 break;
@@ -386,34 +372,34 @@ public class BookSquareController implements Initializable{
                         }
                 }
         }
-        return sql+";";
+        return sql + ";";
     }
 
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
         this.dbc = new dbConnection();
 
     }
 
 
     @FXML
-    private void loadProductListing(ActionEvent ev)throws SQLException{
-        try{
+    private void loadProductListing(ActionEvent ev) throws SQLException {
+        try {
             Connection con = dbConnection.connect();
             this.data = FXCollections.observableArrayList();
             System.out.println(this.tog.getPrice() + this.tog.getCondition() + this.tog.getTime());
             ResultSet rs = con.createStatement().executeQuery(toggle_query(this.tog));
-            while(rs.next()){
+            while (rs.next()) {
                 this.data.add(new ProductListing(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getBoolean(8)));
-                System.out.println(rs.getString(1)+
-                        rs.getString(2)+
-                        rs.getString(3)+
-                        rs.getString(4)+
-                        rs.getString(5)+
-                        rs.getString(6)+
-                        rs.getString(7)+
+                System.out.println(rs.getString(1) +
+                        rs.getString(2) +
+                        rs.getString(3) +
+                        rs.getString(4) +
+                        rs.getString(5) +
+                        rs.getString(6) +
+                        rs.getString(7) +
                         rs.getString(8));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.err.println("Error" + e);
         }
         this.listid_col.setCellValueFactory(new PropertyValueFactory<ProductListing, Integer>("ListingID"));

@@ -21,55 +21,52 @@ public class loginController {
 
     @FXML
     private AnchorPane logInWindow;
-    
+
     @FXML
     private TextField emailTextfield;
 
     @FXML
     private TextField passwordTextfield;
-    
+
     @FXML
     private Button loginButton;
 
     @FXML
     private Button signupButton;
 
+
     //    ************** Variables and small getter method for retireving the user's email from ANYWHERE, including ANY CONTROLLER.
 //    Check BookSquareController!!!!!  - Julia
     @FXML
     private static String email;
     private String password;
-    
     //    GETTER METHOD, GET THE EMAIL from anywhere.
     @FXML
     public static String getUserEmail(){
         return email;
     }
 
-
-    
     @FXML
-//    After pressing the button to log in, the user will be take to the home page.
     private void logIn(ActionEvent e) throws Exception {
-		Login_Obj loginChecker = new Login_Obj();//create Login_Obj to use function valid_login
-		
-    	Alert alert = new Alert(AlertType.ERROR);//create alert dialog if invalid login
-		alert.setTitle("Invalid Login");
-		
-		String email = emailTextfield.getText();
-		String password = passwordTextfield.getText();
+        Login_Obj loginChecker = new Login_Obj();//create Login_Obj to use function valid_login
+
+        Alert alert = new Alert(AlertType.ERROR);//create alert dialog if invalid login
+        alert.setTitle("Invalid Login");
+
+        email = emailTextfield.getText();
+        password = passwordTextfield.getText();
 
 //		Test
 //        System.out.println(email + "    " + password);
-		
-    	if(!loginChecker.valid_login(email, password)) {//if invalid login, display error dialog
-    		alert.setHeaderText("Invalid email/password combination, please check and try again.");
-    		
-    		Optional<ButtonType> result = alert.showAndWait();
-    		if(result.get() == ButtonType.OK)//pressing ok in error dialog closes it
-        		alert.close();
+
+        if(!loginChecker.valid_login(email, password)) {//if invalid login, display error dialog
+            alert.setHeaderText("Invalid email/password combination, please check and try again.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK)//pressing ok in error dialog closes it
+                alert.close();
         }
-    	else {// if valid, take to next page, Julias way commented just in case we need to revert back
+        else {// if valid, take to next page, Julias way commented just in case we need to revert back
 //            AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
 //            logInWindow.getChildren().setAll(p);
             try{
@@ -88,7 +85,7 @@ public class loginController {
             } catch (IOException io){
                 io.printStackTrace();
             }
-    	}
+        }
     }
 
     @FXML

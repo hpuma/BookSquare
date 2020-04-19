@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class myDashboardController {
@@ -22,9 +23,9 @@ public class myDashboardController {
     @FXML
     private Label userEmail;
 
-    public void setUserEmail(String email){
-        userEmail.setText(email);
-    }
+    //    public static void setUserEmail(String email){
+//        userEmail.setText(email);
+//    }
     @FXML
     void logoClicked(MouseEvent mouseEvent) throws IOException {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
