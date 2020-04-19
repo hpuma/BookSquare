@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -137,16 +137,16 @@
                                             </textFill>
                                         </Label>
                                         <Button fx:id="closeUp" layoutX="44.0" layoutY="53.0" mnemonicParsing="false" onAction="#moreBookInfo" text="(Click for a close-up/more details about the book" />
-                              <TableView layoutX="44.0" layoutY="109.0" prefHeight="574.0" prefWidth="801.0">
+                              <TableView fx:id="Listings_Table" layoutX="44.0" layoutY="109.0" prefHeight="574.0" prefWidth="801.0">
                                 <columns>
-                                  <TableColumn prefWidth="86.00000381469727" text="ListingID" />
-                                    <TableColumn minWidth="0.0" prefWidth="102.00003051757812" text="ImageID" />
-                                  <TableColumn minWidth="0.0" prefWidth="79.99986267089844" text="Price" />
-                                    <TableColumn minWidth="0.0" prefWidth="105.33331298828125" text="ISBN" />
-                                    <TableColumn minWidth="0.0" prefWidth="165.33340454101562" text="Title" />
-                                    <TableColumn minWidth="0.0" prefWidth="73.99993896484375" text="Condition" />
-                                    <TableColumn minWidth="0.0" prefWidth="132.6666259765625" text="Time Posted" />
-                                    <TableColumn minWidth="0.0" prefWidth="52.0" text="Status" />
+                                  <TableColumn fx:id="listid_col" prefWidth="86.00000381469727" text="ListingID" />
+                                    <TableColumn fx:id="imgid_col" minWidth="0.0" prefWidth="102.00003051757812" text="ImageID" />
+                                  <TableColumn fx:id="price_col" minWidth="0.0" prefWidth="79.99986267089844" text="Price" />
+                                    <TableColumn fx:id="isbn_col" minWidth="0.0" prefWidth="105.33331298828125" text="ISBN" />
+                                    <TableColumn fx:id="title_col" minWidth="0.0" prefWidth="165.33340454101562" text="Title" />
+                                    <TableColumn fx:id="cond_col" minWidth="0.0" prefWidth="73.99993896484375" text="Condition" />
+                                    <TableColumn fx:id="time_col" minWidth="0.0" prefWidth="132.6666259765625" text="Time Posted" />
+                                    <TableColumn fx:id="status_col" minWidth="0.0" prefWidth="52.0" text="Status" />
                                 </columns>
                               </TableView>
                                     </children>
