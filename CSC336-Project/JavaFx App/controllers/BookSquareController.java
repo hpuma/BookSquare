@@ -112,6 +112,7 @@ public class BookSquareController implements Initializable{
 //    Logs the user out, directing them back to the log in page.
     void logOut(ActionEvent e) throws IOException {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/LogIn.fxml"));
+
         homeWindow.getChildren().setAll(p);
     }
 
@@ -123,17 +124,16 @@ public class BookSquareController implements Initializable{
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/myDashboard.fxml"));//load to next page
             Parent root = (Parent) loader.load();
-
-            myDashboardController myDashboardController = loader.getController();//obtain login info to bring to next controller
-            myDashboardController.setUserEmail(currUserEmail);
-
             Stage stage = new Stage();
+            myDashboardController myDashboardController = loader.getController();//obtain login info to bring to next controller
+            //BookSquareController.getLoginInfo(email, password);
+            myDashboardController.setUserEmail(currUserEmail);
             stage.setScene(new Scene(root));
             stage.show();
 
+        } catch (IOException io){
             Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
             stageToClose.close();
-        } catch (IOException io){
             io.printStackTrace();
         }
     }

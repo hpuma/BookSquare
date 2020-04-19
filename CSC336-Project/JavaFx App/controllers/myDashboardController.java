@@ -25,7 +25,6 @@ public class myDashboardController {
     public void setUserEmail(String email){
         userEmail.setText(email);
     }
-
     @FXML
     void logoClicked(MouseEvent mouseEvent) throws IOException {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));

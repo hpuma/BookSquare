@@ -31,24 +31,24 @@ VALUES
 
 
 INSERT INTO 
-    Listings(ListingID, ImageID, UserID, TimePosted, Status)
+    Listings(ListingID, UserID, TimePosted, Status)
 VALUES
-    (1, 11, 10, '2010-05-28T15:36:56.200', 1),
-	(2, 22, 21, '2011-08-28T13:24:45.200', 1),
-	(3, 33, 32, '2012-08-28T17:52:48.200', 1),
-	(4, 44, 43, '2013-08-28T12:26:55.200', 1),
-	(5, 55, 54, '2014-08-28T11:63:31.200', 1);
+    (1, 10, '2010-05-28T15:36:56.200', 1),
+	(2, 21, '2011-08-28T13:24:45.200', 1),
+	(3, 32, '2012-08-28T17:52:48.200', 1),
+	(4, 43, '2013-08-28T12:26:55.200', 1),
+	(5, 54, '2014-08-28T11:63:31.200', 1);
 
 
 
 INSERT INTO 
-    ListingImage(ImageID, ImageSrc)
+    ListingImage(ListingID, ImageSrc)
 VALUES
-    (11, 'PathtoImage11'),
-    (22, 'PathtoImage22'),
-    (33, 'PathtoImage33'),
-    (44, 'PathtoImage1'),
-    (55, 'PathtoImage1');
+    (1, 'PathtoImage11'),
+    (2, 'PathtoImage22'),
+    (3, 'PathtoImage33'),
+    (4, 'PathtoImage1'),
+    (5, 'PathtoImage1');
 
 
 

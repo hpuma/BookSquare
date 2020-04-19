@@ -11,7 +11,6 @@ public class executeScript {
     // The acceptable table names that we can query from
     public static String[] tableNames = {"users", "profiles","listings","listingimage","product","auditlog","books"};
 
-
     public void createTablesConstraints() throws IOException, SQLException {
 
         FileInputStream f = new FileInputStream(System.getProperty("user.dir") + "\\DatabaseFiles\\TABLES_CONSTRAINTS.sql");
@@ -70,7 +69,6 @@ public class executeScript {
         try{
             ps = c.prepareStatement(SQLQUERY);
             querySet = ps.executeQuery();
-            c.close();
             return querySet;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
