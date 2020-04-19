@@ -130,6 +130,11 @@ public class BookSquareController implements Initializable{
             myDashboardController myDashboardController = loader.getController();//obtain login info to bring to next controller
             //BookSquareController.getLoginInfo(email, password);
             myDashboardController.setUserEmail(currUserEmail);
+
+//            CALLING GETTER METHOD IN loginController class to retrieve user's email from ANYWHERE.
+//            IT IS CALLED IN THE FOLLOWING PRINT STATEMENT:
+            System.out.println("This is the user's email: " + loginController.getUserEmail());
+
             stage.setScene(new Scene(root));
             stage.show();
 

@@ -33,6 +33,20 @@ public class loginController {
 
     @FXML
     private Button signupButton;
+
+    //    ************** Variables and small getter method for retireving the user's email from ANYWHERE, including ANY CONTROLLER.
+//    Check BookSquareController!!!!!  - Julia
+    @FXML
+    private static String email;
+    private String password;
+    
+    //    GETTER METHOD, GET THE EMAIL from anywhere.
+    @FXML
+    public static String getUserEmail(){
+        return email;
+    }
+
+
     
     @FXML
 //    After pressing the button to log in, the user will be take to the home page.
