@@ -3,12 +3,14 @@ package DatabaseFiles;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class executeScript {
+
+    // The acceptable table names that we can query from
+    public static String[] tableNames = {"users", "profiles","listings","listingimage","product","auditlog","books"};
+
 
     public void createTablesConstraints() throws IOException, SQLException {
 
@@ -51,6 +53,31 @@ public class executeScript {
 
         c.close();
     }
+
+    // Checks if the given table name is an acceptable table that we can query from.
+    public static Boolean checkTableInput(String tableInput){
+        tableInput = tableInput.toLowerCase();
+        for(String table: tableNames){
+            if(table.equals(tableInput)){return true;}
+        }
+        return false;
+    }
+    public ResultSet executeStatement(String table, String SQLQUERY){
+        Connection c = dbConnection.connect();
+        try {
+            PreparedStatement ps = c.prepareStatement(SQLQUERY);
+            ResultSet querySet = ps.executeQuery(SQLQUERY);
+            return querySet;
+
+        } catch(SQLException e){
+            System.out.println("There was an unsuccessful connection to the database");
+        }
+        return null;
+    }
+
+
+
+
 
 
 }
