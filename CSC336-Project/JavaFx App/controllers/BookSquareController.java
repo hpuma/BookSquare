@@ -26,6 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
+
 public class BookSquareController implements Initializable{
     public String currUserEmail;
     public String currUserPassword;
@@ -134,6 +136,11 @@ public class BookSquareController implements Initializable{
         } catch (IOException io){
             Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
             stageToClose.close();
+<<<<<<< HEAD
+=======
+
+        } catch (IOException io){
+>>>>>>> 02a1f3d3d2e4bc559fce5b77b814fd61865c9387
             io.printStackTrace();
         }
     }
