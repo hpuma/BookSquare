@@ -38,7 +38,7 @@
                         <Insets left="150.0" top="5.0" />
                      </HBox.margin>
                   </MenuButton>
-                  <TextField fx:id="searchTextField" prefHeight="31.0" prefWidth="310.0" promptText="ISBN, Title, or Author...">
+                  <TextField fx:id="searchTextField" prefHeight="31.0" prefWidth="310.0" promptText="ISBN, Title, or Author..." style="-fx-background-color: #ffffff;">
                      <HBox.margin>
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
@@ -111,31 +111,22 @@
                               </TextField>
                               <Pane prefHeight="54.0" prefWidth="428.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <HBox prefHeight="54.0" prefWidth="361.0">
+                                    <HBox fx:id="conditionGroup" layoutY="12.0">
                                        <children>
-                                          <RadioButton fx:id="newButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Like New">
-                                             <HBox.margin>
-                                                <Insets top="15.0" />
-                                             </HBox.margin>
+                                          <RadioButton fx:id="newButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setNewButton" text="Like New">
                                              <padding>
                                                 <Insets left="30.0" />
                                              </padding>
                                           </RadioButton>
-                                          <RadioButton fx:id="goodButton" mnemonicParsing="false" text="Good">
+                                          <RadioButton fx:id="goodButton" mnemonicParsing="false" onAction="#setGoodButton" text="Good">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
-                                             <HBox.margin>
-                                                <Insets top="15.0" />
-                                             </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="AcceptableButton" mnemonicParsing="false" text="Acceptable">
+                                          <RadioButton fx:id="acceptableButton" mnemonicParsing="false" onAction="#setAcceptableButton" text="Acceptable">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
-                                             <HBox.margin>
-                                                <Insets top="15.0" />
-                                             </HBox.margin>
                                           </RadioButton>
                                        </children>
                                     </HBox>
@@ -177,7 +168,7 @@
                               </TextField>
                            </children>
                         </GridPane>
-                        <Button fx:id="createListingButton" layoutX="233.0" layoutY="509.0" mnemonicParsing="false" style="-fx-background-color: #7654FF;" text="Create Listing" textFill="WHITE">
+                        <Button fx:id="createListingButton" layoutX="233.0" layoutY="509.0" mnemonicParsing="false" onAction="#setCreateListingButton" style="-fx-background-color: #7654FF;" text="Create Listing" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
