@@ -173,3 +173,4 @@ public class BookSquareController implements Initializable{
         this.Listings_Table.setItems(null);
         this.Listings_Table.setItems(this.data);
     }
+}
