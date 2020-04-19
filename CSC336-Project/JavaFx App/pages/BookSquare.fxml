@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -85,7 +85,7 @@
                                         </Pane>
                                         <Pane prefHeight="80.0" prefWidth="316.0">
                                             <children>
-                                                <RadioButton layoutX="14.0" layoutY="11.0" mnemonicParsing="false" text="Lowest First">
+                                                <RadioButton fx:id="low_p" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#change_price" text="Lowest First">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="priceGroup" />
                                                     </toggleGroup>
@@ -93,7 +93,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                                 </RadioButton>
-                                                <RadioButton layoutX="14.0" layoutY="45.0" mnemonicParsing="false" text="Highest First" toggleGroup="$priceGroup">
+                                                <RadioButton fx:id="high_p" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#change_price" text="Highest First" toggleGroup="$priceGroup">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -111,7 +111,7 @@
                                         </Pane>
                                         <Pane prefHeight="115.0" prefWidth="316.0">
                                             <children>
-                                                <RadioButton layoutX="16.0" layoutY="15.0" mnemonicParsing="false" text="Like New">
+                                                <RadioButton fx:id="new_con" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onAction="#change_con" text="Like New">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="conditionGroup" />
                                                     </toggleGroup>
@@ -119,12 +119,12 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                                 </RadioButton>
-                                                <RadioButton layoutX="16.0" layoutY="45.0" mnemonicParsing="false" text="Good" toggleGroup="$conditionGroup">
+                                                <RadioButton fx:id="good_con" layoutX="16.0" layoutY="45.0" mnemonicParsing="false" onAction="#change_con" text="Good" toggleGroup="$conditionGroup">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </RadioButton>
-                                                <RadioButton layoutX="16.0" layoutY="75.0" mnemonicParsing="false" text="Acceptable" toggleGroup="$conditionGroup">
+                                                <RadioButton fx:id="accept_con" layoutX="16.0" layoutY="75.0" mnemonicParsing="false" onAction="#change_con" text="Acceptable" toggleGroup="$conditionGroup">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -142,7 +142,7 @@
                                         </Pane>
                                         <Pane prefHeight="90.0" prefWidth="316.0">
                                             <children>
-                                                <RadioButton layoutX="16.0" layoutY="14.0" mnemonicParsing="false" text="Oldest First">
+                                                <RadioButton fx:id="old_time" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#change_time" text="Oldest First">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="timeGroup" />
                                                     </toggleGroup>
@@ -150,7 +150,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                                 </RadioButton>
-                                                <RadioButton layoutX="16.0" layoutY="45.0" mnemonicParsing="false" text="Newest First" toggleGroup="$timeGroup">
+                                                <RadioButton fx:id="new_time" layoutX="16.0" layoutY="45.0" mnemonicParsing="false" onAction="#change_time" text="Newest First" toggleGroup="$timeGroup">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
