@@ -148,7 +148,7 @@ public class BookSquareController implements Initializable{
             this.data = FXCollections.observableArrayList();
             ResultSet rs = con.createStatement().executeQuery(sql);
             while(rs.next()){
-                this.data.add(new ProductListing(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+                this.data.add(new ProductListing(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getBoolean(8)));
                 System.out.println(rs.getString(1)+
                         rs.getString(2)+
                         rs.getString(3)+
@@ -172,5 +172,6 @@ public class BookSquareController implements Initializable{
 
         this.Listings_Table.setItems(null);
         this.Listings_Table.setItems(this.data);
+
     }
 }
