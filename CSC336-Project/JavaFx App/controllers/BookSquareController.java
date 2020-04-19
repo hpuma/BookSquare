@@ -27,6 +27,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class BookSquareController implements Initializable{
+    public String currUserEmail;
+    public String currUserPassword;
+
     @FXML
     private Button storeLogo;
     @FXML
@@ -78,6 +81,12 @@ public class BookSquareController implements Initializable{
     private VBox homeWindow;
 //    private
 
+    public void getLoginInfo(String email, String password){
+        currUserEmail = email;
+        currUserPassword = password;
+        System.out.println(currUserEmail);
+        System.out.println(currUserPassword);
+    }
 
     @FXML
 //    We need to discuss how we will display the books that match the user's search.
