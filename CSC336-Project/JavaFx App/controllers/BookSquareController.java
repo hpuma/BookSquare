@@ -27,7 +27,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class BookSquareController implements Initializable{
-
+    @FXML
+    private Button storeLogo;
     @FXML
     private Button searchButton;
 
