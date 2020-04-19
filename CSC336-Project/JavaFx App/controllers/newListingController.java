@@ -76,6 +76,12 @@ public class newListingController {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
         newListing.getChildren().setAll(p);
     }
+    @FXML
+    void setCreateListingButtonClicked(ActionEvent e)throws IOException{
+        String title = titleTextField.getText();
+        String author = authorTextField.getText();
+
+    }
     
     @FXML
     void uploadListingImage(ActionEvent event) {

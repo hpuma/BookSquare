@@ -27,7 +27,7 @@
                   <Image url="@../images/bookSquare.png" />
                </image>
             </ImageView>
-            <HBox prefHeight="45.0" prefWidth="1200.0" style="-fx-background-color: #7654FF;">
+            <HBox minHeight="-Infinity" prefHeight="38.0" prefWidth="1200.0" style="-fx-background-color: #7654FF;">
                <children>
                   <MenuButton mnemonicParsing="false" text="Menu">
                      <items>
