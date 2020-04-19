@@ -14,7 +14,7 @@ public class ProductListing {
     private final StringProperty TimePosted;
     private final StringProperty Status;
 
-    public ProductListing(String LID, String ImgID, String P, String isbn, String title, String condition, String t_posted, String status){
+    public ProductListing(String LID, String ImgID, String P, String isbn, String title, String condition, String t_posted, Boolean status){
 
         this.ImageID = new SimpleStringProperty(ImgID);
         this.ListingID = new SimpleStringProperty(LID);
@@ -23,7 +23,18 @@ public class ProductListing {
         this.Title = new SimpleStringProperty(title);
         this.Condition = new SimpleStringProperty(condition);
         this.TimePosted = new SimpleStringProperty(t_posted);
-        this.Status = new SimpleStringProperty(status);
+        this.Status = new SimpleStringProperty(check_availability(status));
+    }
+
+    //Check
+    public String check_availability(Boolean stat){
+        if(stat == Boolean.TRUE){
+            return "OPEN";
+        }
+        else if(stat == Boolean.FALSE){
+            return "CLOSED";
+        }
+        return stat.toString();
     }
 
     //Getters
