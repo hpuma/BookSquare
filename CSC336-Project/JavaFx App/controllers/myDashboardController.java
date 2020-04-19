@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +19,12 @@ public class myDashboardController {
     @FXML
     private AnchorPane myDashboard;
 
+    @FXML
+    private Label userEmail;
 
+    public void setUserEmail(String email){
+        userEmail.setText(email);
+    }
     @FXML
     void logoClicked(MouseEvent mouseEvent) throws IOException {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
