@@ -1,27 +1,30 @@
 package controllers;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ProductListing {
 
-    private final StringProperty ListingID;
+    private final IntegerProperty ListingID;
     private final StringProperty ImageID;
-    private final StringProperty Price;
+    private final FloatProperty Price;
     private final StringProperty ISBN;
     private final StringProperty Title;
     private final StringProperty Condition;
     private final StringProperty TimePosted;
     private final StringProperty Status;
 
-    public ProductListing(String LID, String ImgID, String P, String isbn, String title, String condition, String t_posted, Boolean status){
+    public ProductListing(int LID, String ImgID, float P, String isbn, String title, int condition, String t_posted, Boolean status){
 
         this.ImageID = new SimpleStringProperty(ImgID);
-        this.ListingID = new SimpleStringProperty(LID);
-        this.Price = new SimpleStringProperty(P);
+        this.ListingID = new SimpleIntegerProperty(LID);
+        this.Price = new SimpleFloatProperty(P);
         this.ISBN = new SimpleStringProperty(isbn);
         this.Title = new SimpleStringProperty(title);
-        this.Condition = new SimpleStringProperty(condition);
+        this.Condition = new SimpleStringProperty(check_cond(condition));
         this.TimePosted = new SimpleStringProperty(t_posted);
         this.Status = new SimpleStringProperty(check_availability(status));
     }
@@ -37,6 +40,19 @@ public class ProductListing {
         return stat.toString();
     }
 
+    public String check_cond(int con){
+        if(con == 0){
+            return "Acceptable";
+        }
+        else if(con == 1){
+            return "Good";
+        }
+        else if(con == 2){
+            return "Like New";
+        }
+        return "NULL";
+    }
+
     //Getters
     public String getImageID() {
         return ImageID.get();
@@ -46,19 +62,19 @@ public class ProductListing {
         return ImageID;
     }
 
-    public String getListingID() {
+    public int getListingID() {
         return ListingID.get();
     }
 
-    public StringProperty listingIDProperty() {
+    public IntegerProperty listingIDProperty() {
         return ListingID;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return Price.get();
     }
 
-    public StringProperty priceProperty() {
+    public FloatProperty priceProperty() {
         return Price;
     }
 
@@ -109,11 +125,11 @@ public class ProductListing {
         this.ImageID.set(imageID);
     }
 
-    public void setListingID(String listingID) {
+    public void setListingID(int listingID) {
         this.ListingID.set(listingID);
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.Price.set(price);
     }
 
