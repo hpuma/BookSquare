@@ -124,16 +124,15 @@ public class BookSquareController implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/myDashboard.fxml"));//load to next page
             Parent root = (Parent) loader.load();
 
-            //BookSquareController BookSquareController = loader.getController();//obtain login info to bring to next controller
-            //BookSquareController.getLoginInfo(email, password);
+            myDashboardController myDashboardController = loader.getController();//obtain login info to bring to next controller
+            myDashboardController.setUserEmail(currUserEmail);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
 
-            //not sure if I want to close this window yet
-            //Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
-            //stageToClose.close();
+            Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
+            stageToClose.close();
         } catch (IOException io){
             io.printStackTrace();
         }
