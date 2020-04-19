@@ -80,7 +80,7 @@ public class newListingController {
     void setCreateListingButtonClicked(ActionEvent e)throws IOException{
         String title = titleTextField.getText();
         String author = authorTextField.getText();
-
+        String ISBN = ISBNTextField.getText();
     }
     
     @FXML
