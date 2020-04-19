@@ -3,6 +3,8 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import DatabaseFiles.Login_Obj;
+import javafx.stage.Stage;
 
 public class loginController {
 
@@ -53,9 +56,22 @@ public class loginController {
     		if(result.get() == ButtonType.OK)//pressing ok in error dialog closes it
         		alert.close();
         }
-    	else {// if valid, take to next page
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
-            logInWindow.getChildren().setAll(p);
+    	else {// if valid, take to next page, Julias way commented just in case we need to revert back
+//            AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
+//            logInWindow.getChildren().setAll(p);
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/BookSquare.fxml"));//load to next page
+                Parent root = (Parent) loader.load();
+
+                BookSquareController BookSquareController = loader.getController();//obtain login info to bring to next controller
+                BookSquareController.getLoginInfo(email, password);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException io){
+                io.printStackTrace();
+            }
     	}
     }
 
