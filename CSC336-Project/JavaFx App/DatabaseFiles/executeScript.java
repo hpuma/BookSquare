@@ -62,22 +62,19 @@ public class executeScript {
         }
         return false;
     }
+    // This fully executes an SQL query to a specific table.
     public ResultSet executeStatement(String table, String SQLQUERY){
         Connection c = dbConnection.connect();
-        try {
-            PreparedStatement ps = c.prepareStatement(SQLQUERY);
-            ResultSet querySet = ps.executeQuery(SQLQUERY);
+        PreparedStatement ps = null;
+        ResultSet querySet = null;
+        try{
+            ps = c.prepareStatement(SQLQUERY);
+            querySet = ps.executeQuery();
+            c.close();
             return querySet;
-
-        } catch(SQLException e){
-            System.out.println("There was an unsuccessful connection to the database");
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return null;
     }
-
-
-
-
-
-
 }
