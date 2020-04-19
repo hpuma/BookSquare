@@ -36,6 +36,9 @@ public class BookSquareController implements Initializable{
     private Button searchButton;
 
     @FXML
+    private Button myDashboardButton;
+
+    @FXML
     private ToggleGroup priceGroup;
 
     @FXML
@@ -114,9 +117,26 @@ public class BookSquareController implements Initializable{
 
     @FXML
     void getDashboard(ActionEvent e) throws IOException {
-        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
+//Julias way
+//        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
+//        homeWindow.getChildren().setAll(p);
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/myDashboard.fxml"));//load to next page
+            Parent root = (Parent) loader.load();
 
-        homeWindow.getChildren().setAll(p);
+            //BookSquareController BookSquareController = loader.getController();//obtain login info to bring to next controller
+            //BookSquareController.getLoginInfo(email, password);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            //not sure if I want to close this window yet
+            //Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
+            //stageToClose.close();
+        } catch (IOException io){
+            io.printStackTrace();
+        }
     }
 
     private SortToggle tog = new SortToggle(0,0,0);

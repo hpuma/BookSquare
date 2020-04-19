@@ -69,6 +69,9 @@ public class loginController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+
+                Stage stageToClose = (Stage) loginButton.getScene().getWindow();
+                stageToClose.close();
             } catch (IOException io){
                 io.printStackTrace();
             }
