@@ -136,12 +136,6 @@ public class BookSquareController implements Initializable{
         } catch (IOException io){
             Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
             stageToClose.close();
-<<<<<<< HEAD
-=======
-
-        } catch (IOException io){
->>>>>>> 02a1f3d3d2e4bc559fce5b77b814fd61865c9387
-            io.printStackTrace();
         }
     }
 
@@ -229,7 +223,7 @@ public class BookSquareController implements Initializable{
     private ObservableList<ProductListing> data;
 
     private String toggle_query(SortToggle togg){
-        String sql = "SELECT Listings.ListingID, ListingImage.ImageID, Product.Price, Books.ISBN, Books.Title, Product.Cond, Listings.TimePosted, Listings.Status FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ImageID = ListingImage.ImageID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID";
+        String sql = "SELECT Listings.ListingID, ListingImage.ListingID AS ImageID, Product.Price, Books.ISBN, Books.Title, Product.Cond, Listings.TimePosted, Listings.Status FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID";
         switch(togg.getPrice()){
             case 0:
                 switch (togg.getCondition()){
