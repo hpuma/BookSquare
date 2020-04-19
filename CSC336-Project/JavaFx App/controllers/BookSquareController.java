@@ -26,6 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
+
 public class BookSquareController implements Initializable{
     public String currUserEmail;
     public String currUserPassword;
