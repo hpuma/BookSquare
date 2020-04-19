@@ -10,5 +10,11 @@
         <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="BookSquare [2]" uuid="b4e36d00-b53a-4411-8680-333ed47666ad">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:E:\CSC336-Project\CSC336-Project\JavaFx App\DatabaseFiles\BookSquare.db</jdbc-url>
+    </data-source>
   </component>
 </project>

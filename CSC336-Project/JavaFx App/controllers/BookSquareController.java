@@ -132,9 +132,10 @@ public class BookSquareController implements Initializable{
             stage.setScene(new Scene(root));
             stage.show();
 
-        } catch (IOException io){
             Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();
             stageToClose.close();
+
+        } catch (IOException io){
             io.printStackTrace();
         }
     }
