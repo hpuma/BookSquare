@@ -71,6 +71,7 @@ public class BookSquareController {
 
     @FXML
     void getDashboard(ActionEvent e) throws IOException {
+    	System.out.println("boo1");
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
         homeWindow.getChildren().setAll(p);
     }
