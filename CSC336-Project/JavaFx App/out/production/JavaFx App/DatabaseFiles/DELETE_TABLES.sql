@@ -1,7 +1,7 @@
-DROP TABLE Users;
-DROP TABLE Profiles;
-DROP TABLE Product;
 DROP TABLE Books;
+DROP TABLE Product;
 DROP TABLE AuditLog;
 DROP TABLE ListingImage;
 DROP TABLE Listings;
+DROP TABLE Profiles;
+DROP TABLE Users;
