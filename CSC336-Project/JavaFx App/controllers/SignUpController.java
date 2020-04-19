@@ -1,14 +1,18 @@
 package controllers;
 
 import DatabaseFiles.InsertTableData;
+import DatabaseFiles.SignUp_Obj;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 //import java.awt.*;
 import java.io.IOException;
+import java.util.Optional;
 
 public class SignUpController {
 
@@ -38,14 +42,25 @@ public class SignUpController {
     private void signUp(ActionEvent e) throws IOException {
 
         System.out.println("Sign up button pressed");
+        SignUp_Obj signUpChecker = new SignUp_Obj();
 
-        InsertTableData i = new InsertTableData();
+        Alert alert = new Alert(Alert.AlertType.ERROR);//create alert dialog if invalid login
+        alert.setTitle("Invalid Login");
 
-        i.insertUsers(Integer.parseInt(userID.getText()), firstName.getText(), lastName.getText(), email.getText(), phone.getText(), pass.getText());
+        if(!signUpChecker.valid_SignUp(email.getText(), pass.getText())) {//if invalid SignUp, display error dialog
+            alert.setHeaderText("Invalid email address, please check and try again.");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK)//pressing ok in error dialog closes it
+                alert.close();
+        }
+        else {// if valid, take to next page
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
+            signUpWindow.getChildren().setAll(p);
+            InsertTableData i = new InsertTableData();
+            i.insertUsers(Integer.parseInt(userID.getText()), firstName.getText(), lastName.getText(), email.getText(), phone.getText(), pass.getText());
+        }
 
-        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
-        signUpWindow.getChildren().setAll(p);
     }
 }
 

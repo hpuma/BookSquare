@@ -18,7 +18,7 @@ public class Login_Obj {
     public boolean valid_connection(){
         return  this.c !=null;
     }
-    
+
     //Returns True if entry/user account exists in the database.
     public boolean valid_login(String email, String password)throws Exception{
         PreparedStatement p = null;

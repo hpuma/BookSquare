@@ -42,6 +42,9 @@ public class loginController {
 		
 		String email = emailTextfield.getText();
 		String password = passwordTextfield.getText();
+
+//		Test
+//        System.out.println(email + "    " + password);
 		
     	if(!loginChecker.valid_login(email, password)) {//if invalid login, display error dialog
     		alert.setHeaderText("Invalid email/password combination, please check and try again.");
