@@ -52,6 +52,19 @@ VALUES
 
 
 
+
+INSERT INTO 
+    Books(ISBN, Title, Author)
+VALUES 
+    ('ISBN1', 'Title1', 'Author1'),
+    ('ISBN2', 'Title2', 'Author2'),
+    ('ISBN3', 'Title3', 'Author3'),
+    ('ISBN4', 'Title4', 'Author4'),
+    ('ISBN5', 'Title5', 'Author5');
+
+
+
+
 INSERT INTO 
     Product(ISBN, ListingID, Cond, Price)
 VALUES
@@ -71,14 +84,3 @@ VALUES
 	(373, 3, 32, 3, '2014-03-26T15:36:56.200'),
 	(425, 4, 43, 4, '2012-02-01T15:36:56.200'),
 	(733, 5, 54, 5, '2020-01-24T15:36:56.200');
-
-
-
-INSERT INTO 
-    Books(ISBN, Title, Author)
-VALUES 
-    ('ISBN1', 'Title1', 'Author1'),
-    ('ISBN2', 'Title2', 'Author2'),
-    ('ISBN3', 'Title3', 'Author3'),
-    ('ISBN4', 'Title4', 'Author4'),
-    ('ISBN5', 'Title5', 'Author5');
