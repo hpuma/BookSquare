@@ -12,6 +12,10 @@ public class Login_Obj {
     // Revised the verify login, it connects to the database and queries the user table.
     public boolean valid_login(String email, String password) throws Exception{
         // Safe way of formatting the SQL query
+        if(email.isEmpty() || password.isEmpty()){
+            return false;
+        }
+
         String check = String.format("SELECT * FROM Users WHERE Email=\'%s\'"+" AND Pass=\'%s\';",email,password);
         executeScript runQuery = new executeScript();
         try(ResultSet r = runQuery.executeStatement("users",check)){
