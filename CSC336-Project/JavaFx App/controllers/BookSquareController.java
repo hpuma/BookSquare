@@ -482,12 +482,13 @@ public class BookSquareController implements Initializable {
                     ResultSet counter = pre.executeQuery();
                     pre = con.prepareStatement("SELECT count(UserID) AS ListingCount FROM Listings WHERE UserID = ?;");
                     pre.setInt(1, counter.getInt(1));
-                    counter = pre.executeQuery();
+                    ResultSet counter2 = pre.executeQuery();
 
 //                Sets the information for the pop up after clicking on a listing.
-                    listingViewController.setSellerLabels("Title: " + p.getString(1), "Author: " + p.getString(2), "ISBN: "+p.getString(3), "Name: " + p.getString(4), "userId: " + p.getString(5), "email: " + p.getString(6), "phone: "+p.getString(7), "Posted At "+p.getString(8), "Selling Since: "+p.getString(9), counter.getString(1)+" Listings" );
+                    listingViewController.setSellerLabels("Title: " + p.getString(1), "Author: " + p.getString(2), "ISBN: "+p.getString(3), "Name: " + p.getString(4), "userId: " + p.getString(5), "email: " + p.getString(6), "phone: "+p.getString(7), "Posted At "+p.getString(8), "Selling Since: "+p.getString(9), counter2.getString(1)+" Listings" );
                     p.close();
                     counter.close();
+                    counter2.close();
                     pre.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
