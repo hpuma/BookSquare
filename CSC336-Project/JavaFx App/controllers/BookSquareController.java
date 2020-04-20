@@ -25,6 +25,7 @@ import org.apache.ibatis.javassist.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -36,6 +37,9 @@ public class BookSquareController implements Initializable {
     public UserAccount currAccount = new UserAccount();
     public String currUserEmail;
     public String currUserPassword;
+
+    @FXML
+    private TextField searchText;
 
     @FXML
     private Button storeLogo;
@@ -103,7 +107,10 @@ public class BookSquareController implements Initializable {
 //    We need to discuss how we will display the books that match the user's search.
     void searchButtonClicked(ActionEvent e) throws IOException, SQLException {
         System.out.println("Books have been searched in the home page.");
-        loadProductListing(e);
+        String input = searchText.getText().toLowerCase();
+        System.out.println(input);
+        loadProductListing(e, input);
+
     }
 
     @FXML
@@ -182,10 +189,10 @@ public class BookSquareController implements Initializable {
     @FXML
     public void change_time() {
         if (this.timeGroup.getSelectedToggle().equals(this.old_time)) {
-            this.tog.setCondition(1);
+            this.tog.setTime(1);
         }
         if (this.timeGroup.getSelectedToggle().equals(this.new_time)) {
-            this.tog.setCondition(2);
+            this.tog.setTime(2);
         }
     }
 
@@ -237,8 +244,8 @@ public class BookSquareController implements Initializable {
 
     private ObservableList<ProductListing> data;
 
-    private String toggle_query(SortToggle togg) {
-        String sql = "SELECT Listings.ListingID, ListingImage.ListingID AS ImageID, Product.Price, Books.ISBN, Books.Title, Product.Cond, Listings.TimePosted, Listings.Status FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID";
+    private String toggle_query(SortToggle togg, Connection c) {
+        String sql = "SELECT ListingID, ListingID AS ImageID, Price, ISBN, Title, Cond, TimePosted, Status FROM Temptableview ";
         switch (togg.getPrice()) {
             case 0:
                 switch (togg.getCondition()) {
@@ -248,46 +255,46 @@ public class BookSquareController implements Initializable {
                                 sql = sql.concat(";");
                                 break;
                             case 1:
-                                sql = sql.concat(" ORDER BY Listings.TimePosted ASC;");
+                                sql = sql.concat(" ORDER BY TimePosted ASC;");
                                 break;
                             case 2:
-                                sql = sql.concat(" ORDER BY Listings.TimePosted DESC;");
+                                sql = sql.concat(" ORDER BY TimePosted DESC;");
                                 break;
                         }
                     case 1:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 0;");
+                                sql = sql.concat(" WHERE Cond = 0;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY TimePosted DESC;"));
                                 break;
                         }
                     case 2:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 1;");
+                                sql = sql.concat(" WHERE Cond = 1;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY TimePosted DESC;"));
                                 break;
                         }
                     case 3:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 2;");
+                                sql = sql.concat(" WHERE Cond = 2;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY TimePosted DESC;"));
                                 break;
                         }
                 }
@@ -296,51 +303,51 @@ public class BookSquareController implements Initializable {
                     case 0:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" ORDER BY Product.Price ASC;");
+                                sql = sql.concat(" ORDER BY Price ASC;");
                                 break;
                             case 1:
-                                sql = sql.concat(" ORDER BY Product.Price ASC, Listings.TimePosted ASC;");
+                                sql = sql.concat(" ORDER BY Price ASC, TimePosted ASC;");
                                 break;
                             case 2:
-                                sql = sql.concat(" ORDER BY Product.Price ASC, Listings.TimePosted DESC;");
+                                sql = sql.concat(" ORDER BY Price ASC, TimePosted DESC;");
                                 break;
                         }
                     case 1:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 0 ORDER BY Product.Price ASC;");
+                                sql = sql.concat(" WHERE Cond = 0 ORDER BY Price ASC;");
                                 break;
 
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Product.Price ASC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY Price ASC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Product.Price ASC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY Price ASC, TimePosted DESC;"));
                                 break;
                         }
                     case 2:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 1 ORDER BY Product.Price ASC;");
+                                sql = sql.concat(" WHERE Cond = 1 ORDER BY Price ASC;");
                                 break;
 
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Product.Price ASC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY Price ASC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Product.Price ASC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY Price ASC, TimePosted DESC;"));
                                 break;
                         }
                     case 3:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 2 ORDER BY Product.Price ASC;");
+                                sql = sql.concat(" WHERE Cond = 2 ORDER BY Price ASC;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Product.Price ASC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY Price ASC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Product.Price ASC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY Price ASC, TimePosted DESC;"));
                                 break;
                         }
                 }
@@ -349,49 +356,49 @@ public class BookSquareController implements Initializable {
                     case 0:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" ORDER BY Product.Price DESC;");
+                                sql = sql.concat(" ORDER BY Price DESC;");
                                 break;
                             case 1:
-                                sql = sql.concat(" ORDER BY Product.Price DESC, Listings.TimePosted ASC;");
+                                sql = sql.concat(" ORDER BY Price DESC, TimePosted ASC;");
                                 break;
                             case 2:
-                                sql = sql.concat(" ORDER BY Product.Price DESC, Listings.TimePosted DESC;");
+                                sql = sql.concat(" ORDER BY Price DESC, TimePosted DESC;");
                                 break;
                         }
                     case 1:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 0 ORDER BY Product.Price DESC;");
+                                sql = sql.concat(" WHERE Cond = 0 ORDER BY Price DESC;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Product.Price DESC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY Price DESC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 0 ORDER BY Product.Price DESC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 0 ORDER BY Price DESC, TimePosted DESC;"));
                                 break;
                         }
                     case 2:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 1 ORDER BY Product.Price DESC;");
+                                sql = sql.concat(" WHERE Cond = 1 ORDER BY Price DESC;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Product.Price DESC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY Price DESC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 1 ORDER BY Product.Price DESC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 1 ORDER BY Price DESC, TimePosted DESC;"));
                                 break;
                         }
                     case 3:
                         switch (togg.getTime()) {
                             case 0:
-                                sql = sql.concat(" AND Product.Cond = 2 ORDER BY Product.Price DESC;");
+                                sql = sql.concat(" WHERE Cond = 2 ORDER BY Price DESC;");
                                 break;
                             case 1:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Product.Price DESC, Listings.TimePosted ASC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY Price DESC, TimePosted ASC;"));
                                 break;
                             case 2:
-                                sql = sql.concat((" AND Product.Cond = 2 ORDER BY Product.Price DESC, Listings.TimePosted DESC;"));
+                                sql = sql.concat((" WHERE Cond = 2 ORDER BY Price DESC, TimePosted DESC;"));
                                 break;
                         }
                 }
@@ -405,13 +412,23 @@ public class BookSquareController implements Initializable {
     }
 
 
+
+
     @FXML
-    private void loadProductListing(ActionEvent ev) throws SQLException {
+    private void loadProductListing(ActionEvent ev, String s) throws SQLException {
         try {
             Connection con = dbConnection.connect();
+            PreparedStatement ps = con.prepareStatement("DROP TABLE IF EXISTS Temptableview;");
+            ps.execute();
+            ps = con.prepareStatement("CREATE TEMPORARY TABLE Temptableview AS SELECT * FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID AND (LOWER(Books.ISBN) LIKE ? OR LOWER(Books.Title) LIKE ? OR LOWER(Books.Author) LIKE ?);");
+            ps.setString(1, "%"+s+"%");
+            ps.setString(2, "%"+s+"%");
+            ps.setString(3, "%"+s+"%");
+            ps.execute();
+
             this.data = FXCollections.observableArrayList();
             System.out.println(this.tog.getPrice() + this.tog.getCondition() + this.tog.getTime());
-            ResultSet rs = con.createStatement().executeQuery(toggle_query(this.tog));
+            ResultSet rs = con.createStatement().executeQuery(toggle_query(this.tog, con));
             while (rs.next()) {
                 this.data.add(new ProductListing(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getBoolean(8)));
                 System.out.println(rs.getString(1) +
@@ -423,6 +440,8 @@ public class BookSquareController implements Initializable {
                         rs.getString(7) +
                         rs.getString(8));
             }
+
+
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
@@ -438,8 +457,6 @@ public class BookSquareController implements Initializable {
         this.Listings_Table.setItems(null);
         this.Listings_Table.setItems(this.data);
 
-
-//
         this.Listings_Table.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event){
@@ -458,9 +475,6 @@ public class BookSquareController implements Initializable {
                 stage.show();
             }
         });
-
-
     }
-
 
 }
