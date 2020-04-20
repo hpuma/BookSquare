@@ -420,11 +420,11 @@ public class BookSquareController implements Initializable {
 
             PreparedStatement ps = con.prepareStatement("DROP TABLE IF EXISTS Temptableview;");
             ps.execute();
-            ps = con.prepareStatement("CREATE TEMPORARY TABLE Temptableview AS SELECT * FROM Listings, Product, ListingImage, Books, Users, Profiles WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID AND Users.UserID = Profiles.UserID AND (LOWER(Books.ISBN) LIKE ? OR LOWER(Books.Title) LIKE ? OR LOWER(Books.Author) LIKE ?);");
-            ps.setString(1, "%"+s+"%");
-            ps.setString(2, "%"+s+"%");
-            ps.setString(3, "%"+s+"%");
-            ps.execute();
+            PreparedStatement ps2 = con.prepareStatement("CREATE TEMPORARY TABLE Temptableview AS SELECT * FROM Listings, Product, ListingImage, Books, Users, Profiles WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID AND Users.UserID = Profiles.UserID AND (LOWER(Books.ISBN) LIKE ? OR LOWER(Books.Title) LIKE ? OR LOWER(Books.Author) LIKE ?);");
+            ps2.setString(1, "%"+s+"%");
+            ps2.setString(2, "%"+s+"%");
+            ps2.setString(3, "%"+s+"%");
+            ps2.execute();
 
             this.data = FXCollections.observableArrayList();
             System.out.println(this.tog.getPrice() + this.tog.getCondition() + this.tog.getTime());
@@ -440,7 +440,9 @@ public class BookSquareController implements Initializable {
                         rs.getString(7) +
                         rs.getString(8));
             }
-
+            rs.close();
+            ps.close();
+            ps2.close();
 
         } catch (SQLException e) {
             System.err.println("Error" + e);
@@ -477,12 +479,12 @@ public class BookSquareController implements Initializable {
                     PreparedStatement pre = con.prepareStatement("SELECT Title, Author, ISBN, FirstName ||' '|| LastName AS Name, UserID, Email, Phone, TimePosted, RegDate FROM Temptableview WHERE ListingID = ?;");
                     pre.setInt(1, lid_temp);
                     ResultSet p = pre.executeQuery();
-                    pre = con.prepareStatement("SELECT UserID FROM Listings WHERE ListingID = ?;");
-                    pre.setInt(1, lid_temp);
-                    ResultSet counter = pre.executeQuery();
-                    pre = con.prepareStatement("SELECT count(UserID) AS ListingCount FROM Listings WHERE UserID = ?;");
-                    pre.setInt(1, counter.getInt(1));
-                    ResultSet counter2 = pre.executeQuery();
+                    PreparedStatement pre2 = con.prepareStatement("SELECT UserID FROM Listings WHERE ListingID = ?;");
+                    pre2.setInt(1, lid_temp);
+                    ResultSet counter = pre2.executeQuery();
+                    PreparedStatement pre3 = con.prepareStatement("SELECT count(UserID) AS ListingCount FROM Listings WHERE UserID = ?;");
+                    pre3.setInt(1, counter.getInt(1));
+                    ResultSet counter2 = pre3.executeQuery();
 
 //                Sets the information for the pop up after clicking on a listing.
                     listingViewController.setSellerLabels("Title: " + p.getString(1), "Author: " + p.getString(2), "ISBN: "+p.getString(3), "Name: " + p.getString(4), "userId: " + p.getString(5), "email: " + p.getString(6), "phone: "+p.getString(7), "Posted At "+p.getString(8), "Selling Since: "+p.getString(9), counter2.getString(1)+" Listings" );
@@ -490,6 +492,8 @@ public class BookSquareController implements Initializable {
                     counter.close();
                     counter2.close();
                     pre.close();
+                    pre2.close();
+                    pre3.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
