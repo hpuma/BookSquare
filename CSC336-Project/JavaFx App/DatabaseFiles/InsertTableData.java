@@ -18,7 +18,7 @@ public class InsertTableData {
             ps.setString(6, pass);
 
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The Users table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,24 +34,23 @@ public class InsertTableData {
             ps.setString(2, avatar);
             ps.setDate(3, regDate);
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The Profiles table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void insertListings(int listingID, int imageID, int userID, Timestamp time, boolean b) {
+    public static void insertListings(int listingID, int userID, Timestamp time, boolean b) {
         Connection c = dbConnection.connect();
 
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO Listings(ListingID, ImageId, UserID, TimePosted, Status) VALUES(?,?,?,?, ?)");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO Listings(ListingID, UserID, TimePosted, Status) VALUES(?,?,?,?)");
             ps.setInt(1, listingID);
-            ps.setInt(2, imageID);
-            ps.setInt(3, userID);
-            ps.setTimestamp(4, time);
-            ps.setBoolean(5, b);
+            ps.setInt(2, userID);
+            ps.setTimestamp(3, time);
+            ps.setBoolean(4, b);
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The Listings table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,14 +72,14 @@ public class InsertTableData {
 
     }
 
-    public static void insertImage(int imageID, String imageSrc) {
+    public static void insertImage(int listingID, String imageSrc) {
         Connection c = dbConnection.connect();
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO ListingImage(ImageId, ImageSrc) VALUES(?,?)");
-            ps.setInt(1, imageID);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ListingImage(ListingID, ImageSrc) VALUES(?,?)");
+            ps.setInt(1, listingID);
             ps.setString(2, imageSrc);
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The Image table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,7 +95,7 @@ public class InsertTableData {
             ps.setInt(3, cond);
             ps.setDouble(4, price);
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The Products table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,7 +111,7 @@ public class InsertTableData {
             ps.setInt(4, buyerId);
             ps.setTimestamp(5, time);
             ps.execute();
-            System.out.println("The Books table has been updated with the specified values");
+            System.out.println("The AuditLog table has been updated with the specified values");
         } catch (SQLException e) {
             e.printStackTrace();
         }

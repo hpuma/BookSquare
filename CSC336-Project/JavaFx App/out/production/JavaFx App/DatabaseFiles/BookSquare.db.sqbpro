@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/CSC336-Project/CSC336-Project/JavaFx App/DatabaseFiles/BookSquare.db" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1614"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="Product"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="AuditLog" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths><column index="5" value="204"/></column_widths><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Listings" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths><column index="3" value="196"/><column index="4" value="135"/></column_widths><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Product" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Profiles" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Users" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table></browse_table_settings></tab_browse><tab_sql><sql name="DELETE_TABLES.sql">DROP TABLE Books;
+DROP TABLE Product;
+DROP TABLE AuditLog;
+DROP TABLE ListingImage;
+DROP TABLE Listings;
+DROP TABLE Profiles;
+DROP TABLE Users;</sql><sql name="TABLES_CONSTRAINTS.sql">-- UserID, FirstName, LastName, Phone, Email, Password
+CREATE TABLE IF NOT EXISTS Users (
+   UserID INT UNSIGNED AUTO_INCREMENT,
+   FirstName VARCHAR(255) NOT NULL,
+   LastName VARCHAR(255) NOT NULL,
+   Phone VARCHAR(255) NOT NULL UNIQUE,
+   Email VARCHAR(255) NOT NULL UNIQUE,
+   Pass VARCHAR(255) NOT NULL,
+   PRIMARY KEY(UserID)
+);
+
+-- UserID, Avatar, RegDate
+CREATE TABLE IF NOT EXISTS Profiles (
+   UserID INT UNSIGNED,
+   Avatar VARCHAR(255),
+   RegDate DATE,
+   PRIMARY KEY(UserID),
+   FOREIGN KEY(UserID) REFERENCES Users(UserID)
+   ON DELETE CASCADE
+);
+
+-- ListingID, ImageID, UserID, TimePosted, Status
+CREATE TABLE IF NOT EXISTS Listings (
+	ListingID INT UNSIGNED AUTO_INCREMENT,
+	UserID INT UNSIGNED,
+	TimePosted TIMESTAMP,
+	Status BIT(1),
+	PRIMARY KEY(ListingID)
+	FOREIGN KEY(UserID) REFERENCES Users(UserID)
+	ON DELETE CASCADE
+);
+
+-- ImageID, Size, Type
+CREATE TABLE IF NOT EXISTS ListingImage (
+   ListingID INT UNSIGNED PRIMARY KEY,
+   ImageSrc VARCHAR(255) NOT NULL,
+   FOREIGN KEY(ListingID) REFERENCES Listings(ListingID)
+   ON DELETE CASCADE
+);
+
+-- ListingID, ISBN, Condition, Price .................................
+CREATE TABLE IF NOT EXISTS Product (
+	ISBN VARCHAR(255),
+	ListingID INT UNSIGNED NOT NULL,
+	Cond INT UNSIGNED NOT NULL,
+	Price DECIMAL UNSIGNED NOT NULL,
+	PRIMARY KEY(ListingID),
+	FOREIGN KEY(ListingID) REFERENCES Listings(ListingID),
+	FOREIGN KEY(ISBN) REFERENCES Books(ISBN)
+	ON DELETE CASCADE
+);
+
+-- TransactionID, BuyerID, SellerID, ListingID, TimeCompleted
+CREATE TABLE IF NOT EXISTS AuditLog (
+   TransID INT UNSIGNED AUTO_INCREMENT,
+   ListingID INT UNSIGNED,
+   SellerID INT UNSIGNED NOT NULL,
+   BuyerID INT UNSIGNED NOT NULL,
+   TimeComplete TIMESTAMP NOT NULL,
+   PRIMARY KEY(TransID, ListingID)
+);
+
+--ISBN Title Author
+CREATE TABLE IF NOT EXISTS Books (
+   ISBN VARCHAR(255),
+   Title VARCHAR(255) NOT NULL,
+   Author VARCHAR(255),
+   PRIMARY KEY(ISBN)
+);
+</sql><sql name="POPULATE_TABLES.sql">INSERT INTO 
+    Users(UserID, FirstName, LastName, Phone, Email, Pass)
+VALUES
+    (1, 'Name1', 'LName1', 'Phone1', 'Email1', 'Pass1'),
+    (2, 'Name2', 'LName2', 'Phone2', 'Email2', 'Pass2'),
+    (3, 'Name3', 'LName3', 'Phone3', 'Email3', 'Pass3'),
+    (4, 'Name4', 'LName4', 'Phone4', 'Email4', 'Pass4'),
+    (5, 'Name5', 'LName5', 'Phone5', 'Email5', 'Pass5'),
+    (10, 'Name10', 'LName10', 'Phone10', 'Email10', 'Pass10'),
+    (21, 'Name21', 'LName21', 'Phone21', 'Email21', 'Pass21'),
+    (32, 'Name32', 'LName32', 'Phone32', 'Email32', 'Pass32'),
+    (43, 'Name43', 'LName43', 'Phone43', 'Email43', 'Pass43'),
+    (54, 'Name54', 'LName54', 'Phone54', 'Email54', 'Pass54');
+
+
+
+INSERT INTO
+    Profiles(UserID, Avatar, RegDate)
+VALUES
+    (1, 'Avatar1', '2020-04-20'),
+    (2, 'Avatar2', '2019-04-21'),
+    (3, 'Avatar3', '2012-04-22'),
+    (4, 'Avatar4', '2000-04-23'),
+    (5, 'Avatar5', '2001-04-24'),
+    (10, 'Avatar10', '2015-04-25'),
+    (21, 'Avatar21', '2017-04-26'),
+    (32, 'Avatar32', '2016-04-27'),
+    (43, 'Avatar43', '2016-04-28'),
+    (54, 'Avatar54', '2011-04-29');
+
+
+
+INSERT INTO 
+    Listings(ListingID, UserID, TimePosted, Status)
+VALUES
+    (1, 10, '2010-05-28T15:36:56.200', 1),
+	(2, 21, '2011-08-28T13:24:45.200', 1),
+	(3, 32, '2012-08-28T17:52:48.200', 1),
+	(4, 43, '2013-08-28T12:26:55.200', 1),
+	(5, 54, '2014-08-28T11:63:31.200', 1);
+
+
+
+INSERT INTO 
+    ListingImage(ListingID, ImageSrc)
+VALUES
+    (1, 'PathtoImage11'),
+    (2, 'PathtoImage22'),
+    (3, 'PathtoImage33'),
+    (4, 'PathtoImage1'),
+    (5, 'PathtoImage1');
+
+
+
+
+INSERT INTO 
+    Books(ISBN, Title, Author)
+VALUES 
+    ('ISBN1', 'Title1', 'Author1'),
+    ('ISBN2', 'Title2', 'Author2'),
+    ('ISBN3', 'Title3', 'Author3'),
+    ('ISBN4', 'Title4', 'Author4'),
+    ('ISBN5', 'Title5', 'Author5');
+
+
+
+
+INSERT INTO 
+    Product(ISBN, ListingID, Cond, Price)
+VALUES
+    ('ISBN1', 1, 2, 21.99),
+    ('ISBN2', 2, 1, 22.99),
+    ('ISBN3', 3, 1, 23.99),
+    ('ISBN4', 4, 0, 24.99),
+    ('ISBN5', 5, 2, 25.99);
+
+
+
+INSERT INTO 
+    AuditLog(TransID,ListingID,SellerID,BuyerID,TimeComplete)
+VALUES
+    (532, 1, 10, 1, '2015-08-03T15:36:56.200'),
+	(252, 2, 21, 2, '2012-02-14T15:36:56.200'),
+	(373, 3, 32, 3, '2014-03-26T15:36:56.200'),
+	(425, 4, 43, 4, '2012-02-01T15:36:56.200'),
+	(733, 5, 54, 5, '2020-01-24T15:36:56.200');
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

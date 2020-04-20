@@ -1,5 +1,6 @@
 package controllers;
 
+import DatabaseFiles.InsertTableData;
 import DatabaseFiles.executeScript;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,12 +18,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Date;
 
 public class newListingController {
-
+    // Path to the current image to upload to the database.
+    public static String imageName = "file:"+System.getProperty("user.dir") + "\\images\\gettyimages-766410071-612x612.jpg";
     @FXML
     private AnchorPane newListing;
 
@@ -47,14 +48,14 @@ public class newListingController {
     @FXML
     private TextField ISBNTextField;
 
+    // Radio Buttons
+    @FXML
+    private RadioButton acceptableButton;
+    @FXML
+    private RadioButton goodButton;
     @FXML
     private RadioButton newButton;
 
-    @FXML
-    private RadioButton goodButton;
-
-    @FXML
-    private RadioButton acceptableButton;
 
     @FXML
     private TextField priceTextField;
@@ -84,18 +85,16 @@ public class newListingController {
     }
 // Checks to see if there is a single radio button selected then returns the condition value
 // If somehow, none or all are selected then we return an empty string meaning that there is a non-valid condition.
-    private String getSingleButton(RadioButton[] buttonList){
+    private int getSingleButton(RadioButton[] buttonList){
         int buttonActive = 0;
         String message = "";
         for (RadioButton currButton: buttonList){
             if(currButton.isSelected()){
-                buttonActive +=1;
-                if (buttonActive == 1){
-                    message = currButton.getText();
-                }
+                return buttonActive;
             }
+            buttonActive+=1;
         }
-        return buttonActive == 1?message:"" ;
+        return -1; // Rare case where none of them are active
     }
     // Updating the radio buttons when pressed so only one button is selected at a time.
     @FXML
@@ -124,24 +123,29 @@ public class newListingController {
             String title = titleTextField.getText();
             String author = authorTextField.getText();
             String isbn = ISBNTextField.getText();
-            String condition = getSingleButton(new RadioButton[]{newButton, goodButton, acceptableButton});
+            int condition = getSingleButton(new RadioButton[]{acceptableButton, goodButton, newButton});
             double Price = Double.parseDouble(priceTextField.getText()); //Will give you a nasty error if not handled!
-            // GET IMAGE PATH SOMEHOW
+
 
             // When all the data is VALID, Condition is valid and text is not empty!
-            if (title.isEmpty() ^ author.isEmpty() ^ isbn.isEmpty() ^ Double.isNaN(Price) ^ !condition.isEmpty()){
-                // Generating the required query to find a duplicate listing.
-                int searchUserId = loginController.currAccount.getUserID();
-                System.out.println(searchUserId);
+            if (title.isEmpty() ^ author.isEmpty() ^ isbn.isEmpty() ^ Double.isNaN(Price) ^ (condition >= 0)){
 
+                // Getting UserID
+                int currentUserID = loginController.currAccount.getUserID();
+
+                // Create the TimeStamp Column
+                Date now = new Date();
+                Timestamp currentTime = new Timestamp(now.getTime());
+
+                System.out.println(currentTime);
+                System.out.println(currentUserID);
                 executeScript listingQuery = new executeScript();
                 String findListingQuery = String.format("SELECT * FROM \n" +
                         "(Listings JOIN Product \n" +
                         "ON Listings.ListingID = Product.ListingID)\n" +
                         "WHERE Listings.UserID =%d " +
                         "AND Product.ISBN ='%s' " +
-                        "AND Product.Cond='%s'" +
-                        "AND Listings.Status=1;",searchUserId,isbn,condition.replaceAll("\\s",""));
+                        "AND Product.Cond='%s'" + "AND Listings.Status=1;",currentUserID,isbn,condition);
 
                 // Executing the query to find a duplicate.
                 try(ResultSet listingSearch =  listingQuery.executeStatement(findListingQuery)){
@@ -155,13 +159,21 @@ public class newListingController {
                     // ADD THE ITEM HERE, SET ADD QUERIES HERE.
                     System.out.println("BOOK NOT FOUND");
 
+                    // Creating the ListingID
+                    String hashMaker = isbn+currentUserID+Price;
+                    int newListingID = Math.abs(hashMaker.hashCode());
+
+                    // Inserting to listings
+                    InsertTableData.insertListings(newListingID,currentUserID,currentTime,true);
+                    System.out.println(imageName);
+                    InsertTableData.insertImage(newListingID,imageName);
 
 
-                } catch (SQLException ex){ ex.printStackTrace(); }
-            } else{ System.out.println("INVALID DATA "); }
+
+                } catch (SQLException ex){ System.out.println("INVALID DATA 1");}
+            } else{ System.out.println("INVALID DATA 2 "); }
         } catch (NullPointerException ex){
             System.out.println("UNACCEPTABLE PRICE");
-            ex.printStackTrace();
         }
         catch (NumberFormatException ex){
             System.out.println("PRICE IS NOT VALID");
@@ -174,9 +186,8 @@ public class newListingController {
     	File selectedFile = fileChooser.showOpenDialog(newListing.getScene().getWindow());
     	String imagePath = selectedFile.getAbsolutePath();//get file path
     	System.out.println(imagePath);
-
-        Image image = new Image(selectedFile.toURI().toString());//change image to selected image
+        imageName = selectedFile.toURI().toString();
+        Image image = new Image(imageName);//change image to selected image
         uploadImage.setImage(image);
-
     }
 }

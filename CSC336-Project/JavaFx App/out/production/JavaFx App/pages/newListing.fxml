@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.newListingController">
+<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.newListingController">
    <children>
       <VBox minHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0">
          <children>
@@ -113,9 +113,9 @@
                                  <children>
                                     <HBox fx:id="conditionGroup" layoutY="12.0">
                                        <children>
-                                          <RadioButton fx:id="newButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setNewButton" text="Like New">
+                                          <RadioButton fx:id="acceptableButton" mnemonicParsing="false" onAction="#setAcceptableButton" text="Acceptable">
                                              <padding>
-                                                <Insets left="30.0" />
+                                                <Insets left="20.0" />
                                              </padding>
                                           </RadioButton>
                                           <RadioButton fx:id="goodButton" mnemonicParsing="false" onAction="#setGoodButton" text="Good">
@@ -123,9 +123,9 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </RadioButton>
-                                          <RadioButton fx:id="acceptableButton" mnemonicParsing="false" onAction="#setAcceptableButton" text="Acceptable">
+                                          <RadioButton fx:id="newButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setNewButton" text="Like New">
                                              <padding>
-                                                <Insets left="20.0" />
+                                                <Insets left="30.0" />
                                              </padding>
                                           </RadioButton>
                                        </children>
