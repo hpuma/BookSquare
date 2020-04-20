@@ -33,7 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class BookSquareController implements Initializable {
+public class gitBookSquareController implements Initializable {
     public UserAccount currAccount = new UserAccount();
     public String currUserEmail;
     public String currUserPassword;
