@@ -23,7 +23,11 @@ public class Login_Obj {
             ps.setString(2, password);
             ResultSet r = ps.executeQuery();
             if (r != null) { // The current input has been successfully queried in the database.
-                return r.getString("Email").equals(email) && r.getString("Pass").equals(password); // Double check for verification
+                String emailFound = r.getString("Email");
+                String passFound = r.getString("Pass");
+                r.close();
+                ps.close();
+                return email.equals(emailFound) && password.equals(passFound);
             } else {
                 return false; // The Current User does not exist.
             }
