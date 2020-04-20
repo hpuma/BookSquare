@@ -12,12 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import DatabaseFiles.dbConnection;
+import org.apache.ibatis.javassist.Loader;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +28,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class BookSquareController implements Initializable {
@@ -434,6 +439,28 @@ public class BookSquareController implements Initializable {
         this.Listings_Table.setItems(this.data);
 
 
+//
+        this.Listings_Table.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle (MouseEvent event){
+                FXMLLoader Loader = new FXMLLoader();
+                Loader.setLocation(getClass().getResource("/pages/listingView.fxml"));
+
+                try {
+                    Loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("TEST:: Getting a closer look at the book listing...");
+                Parent p = Loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.show();
+            }
+        });
+
+
     }
+
 
 }
