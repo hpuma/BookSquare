@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 
 public class BookSquareController implements Initializable {
+    public UserAccount currAccount = new UserAccount();
     public String currUserEmail;
     public String currUserPassword;
 
@@ -85,11 +86,12 @@ public class BookSquareController implements Initializable {
     private VBox homeWindow;
 //    private
 
-    public void getLoginInfo(String email, String password) {
+    public void getLoginInfo(String email, String password) throws Exception {
         currUserEmail = email;
         currUserPassword = password;
-        System.out.println(currUserEmail);
-        System.out.println(currUserPassword);
+        currAccount.updateAccount(email, password);
+        System.out.println(currAccount.getEmail());
+        System.out.println(currAccount.getPass());
     }
 
     @FXML
@@ -119,9 +121,26 @@ public class BookSquareController implements Initializable {
 
     @FXML
     void getDashboard(ActionEvent e) throws IOException {
-//Julias way
-        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
-        homeWindow.getChildren().setAll(p);
+
+        String fullName = currAccount.getFirstName() + " " + currAccount.getLastName();//Info to show
+        String userId = String.valueOf(currAccount.getUserID());
+        //System.out.println(fullName);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/myDashboard.fxml"));//load next controller
+        Parent root = (Parent) loader.load();
+
+        myDashboardController myDashboardController = loader.getController();
+        myDashboardController.setUserLabels(fullName, userId, currAccount.getEmail(), currAccount.getPhone());//change labels in dashboard fxml
+
+        Stage stage = new Stage();//change to new scene
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        Stage stageToClose = (Stage) myDashboardButton.getScene().getWindow();//close old window
+        stageToClose.close();
+
+        //AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/myDashboard.fxml"));
+        //homeWindow.getChildren().setAll(p);
 
 //            CALLING GETTER METHOD IN loginController class to retrieve user's email from ANYWHERE.
 //            IT IS CALLED IN THE FOLLOWING PRINT STATEMENT:

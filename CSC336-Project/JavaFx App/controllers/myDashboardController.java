@@ -21,11 +21,31 @@ public class myDashboardController {
     private AnchorPane myDashboard;
 
     @FXML
+    private Label userFullName;
+
+    @FXML
+    private Label userID;
+
+    @FXML
     private Label userEmail;
 
+    @FXML
+    private Label userPhone;
+
+    public String fullName;
     //    public static void setUserEmail(String email){
 //        userEmail.setText(email);
 //    }
+
+
+    
+    public void setUserLabels(String fullName, String userId, String email, String phoneNumber){
+        userFullName.setText(fullName);
+        userID.setText(userId);
+        userEmail.setText(email);
+        userPhone.setText(phoneNumber);
+    }
+
     @FXML
     void logoClicked(MouseEvent mouseEvent) throws IOException {
         AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
