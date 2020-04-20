@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.newListingController">
+<AnchorPane fx:id="newListing" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.newListingController">
    <children>
       <VBox minHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0">
          <children>
@@ -188,7 +188,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="uploadButton" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Upload Image" />
+                              <Button fx:id="uploadButton" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onAction="#uploadListingImage" prefHeight="30.0" prefWidth="130.0" text="Upload Image" />
                            </children>
                         </Pane>
                      </children>
