@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.beans.Observable;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -413,15 +412,15 @@ public class BookSquareController implements Initializable {
     }
 
 
-
+    public Connection con = dbConnection.connect();
 
     @FXML
     private void loadProductListing(ActionEvent ev, String s) throws SQLException {
         try {
-            Connection con = dbConnection.connect();
+
             PreparedStatement ps = con.prepareStatement("DROP TABLE IF EXISTS Temptableview;");
             ps.execute();
-            ps = con.prepareStatement("CREATE TEMPORARY TABLE Temptableview AS SELECT * FROM Listings, Product, ListingImage, Books, Users WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID AND (LOWER(Books.ISBN) LIKE ? OR LOWER(Books.Title) LIKE ? OR LOWER(Books.Author) LIKE ?);");
+            ps = con.prepareStatement("CREATE TEMPORARY TABLE Temptableview AS SELECT * FROM Listings, Product, ListingImage, Books, Users, Profiles WHERE Listings.ListingID = Product.ListingID AND Listings.ListingID = ListingImage.ListingID AND Books.ISBN = Product.ISBN AND Listings.UserID = Users.UserID AND Users.UserID = Profiles.UserID AND (LOWER(Books.ISBN) LIKE ? OR LOWER(Books.Title) LIKE ? OR LOWER(Books.Author) LIKE ?);");
             ps.setString(1, "%"+s+"%");
             ps.setString(2, "%"+s+"%");
             ps.setString(3, "%"+s+"%");
@@ -459,6 +458,8 @@ public class BookSquareController implements Initializable {
         this.Listings_Table.setItems(this.data);
 
         this.Listings_Table.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+
             @Override
             public void handle (MouseEvent event){
                 FXMLLoader Loader = new FXMLLoader();
@@ -471,24 +472,31 @@ public class BookSquareController implements Initializable {
                 }
                 System.out.println("TEST:: Getting a closer look at the book listing...");
                 listingViewController listingViewController = Loader.getController();
+                int lid_temp = Listings_Table.getSelectionModel().getSelectedItem().getListingID();
+                try {
+                    PreparedStatement pre = con.prepareStatement("SELECT Title, Author, ISBN, FirstName ||' '|| LastName AS Name, UserID, Email, Phone, TimePosted, RegDate FROM Temptableview WHERE ListingID = ?;");
+                    pre.setInt(1, lid_temp);
+                    ResultSet p = pre.executeQuery();
+                    pre = con.prepareStatement("SELECT UserID FROM Listings WHERE ListingID = ?;");
+                    pre.setInt(1, lid_temp);
+                    ResultSet counter = pre.executeQuery();
+                    pre = con.prepareStatement("SELECT count(UserID) AS ListingCount FROM Listings WHERE UserID = ?;");
+                    pre.setInt(1, counter.getInt(1));
+                    counter = pre.executeQuery();
+
 //                Sets the information for the pop up after clicking on a listing.
+                    listingViewController.setSellerLabels("Title: " + p.getString(1), "Author: " + p.getString(2), "ISBN: "+p.getString(3), "Name: " + p.getString(4), "userId: " + p.getString(5), "email: " + p.getString(6), "phone: "+p.getString(7), "Posted At "+p.getString(8), "Selling Since: "+p.getString(9), counter.getString(1)+" Listings" );
+                    p.close();
+                    counter.close();
+                    pre.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-                // Getting the selected rows and transferring for display.
-                TableView.TableViewSelectionModel<ProductListing> selectionModel = Listings_Table.getSelectionModel();
-                ObservableList<ProductListing> selectedData = selectionModel.getSelectedItems();
-                // DEBUGGING
-                int selectedSize = selectedData.size();
-                System.out.println("Selected Listing Size:"+ selectedSize);
-                // MAKING SURE WE ONLY SELECTED ONE LISTING
-                if (selectedSize == 1){
-                    ProductListing s = selectedData.get(0);
-                    listingViewController.setSellerLabels(s.getListingID(),s.getTitle(),s.getISBN(),s.getTimePosted());
-                    Parent p = Loader.getRoot();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(p));
-                    stage.show();
-                }else{  System.out.println("MORE THAN ONE ITEM SELECTED"); }
-
+                Parent p = Loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.show();
             }
         });
     }
