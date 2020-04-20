@@ -33,7 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class gitBookSquareController implements Initializable {
+public class BookSquareController implements Initializable {
     public UserAccount currAccount = new UserAccount();
     public String currUserEmail;
     public String currUserPassword;
@@ -469,7 +469,6 @@ public class gitBookSquareController implements Initializable {
                     e.printStackTrace();
                 }
                 System.out.println("TEST:: Getting a closer look at the book listing...");
-                
                 listingViewController listingViewController = Loader.getController();
 //                Sets the information for the pop up after clicking on a listing.
                 listingViewController.setSellerLabels("Book", "Author", "ISBN", "name", "userId", "email", "phone");
