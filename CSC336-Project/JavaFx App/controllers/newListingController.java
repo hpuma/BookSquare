@@ -1,5 +1,6 @@
 package controllers;
 
+import DatabaseFiles.executeScript;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class newListingController {
 
@@ -124,6 +128,18 @@ public class newListingController {
             if (title.isEmpty() ^ author.isEmpty() ^ ISBN.isEmpty() ^ Price.isNaN() ^ !Condition.isEmpty()){
                 System.out.println(title+"\n"+author+"\n"+ISBN+"\n"+Condition);
                 System.out.println(Price);
+                int searchUserId = 10;
+                String findListingQuery = String.format("SELECT * FROM (Listings JOIN Product ON Listings.ListingID = Product.ListingID) WHERE UserID='%d' AND ISBN ='%s';",searchUserId,ISBN);
+                executeScript listingQuery = new executeScript();
+                ResultSet listingSearch =  listingQuery.executeStatement(findListingQuery);
+
+                if (listingSearch != null){
+                    System.out.println("HEYOOO");
+                }else{
+                    System.out.println("Not Here");
+                }
+
+
             }else{
                 System.out.println("INVALID DATA ");
             }
