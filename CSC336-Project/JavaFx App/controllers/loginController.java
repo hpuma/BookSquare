@@ -18,7 +18,8 @@ import DatabaseFiles.Login_Obj;
 import javafx.stage.Stage;
 
 public class loginController {
-    public UserAccount currAccount = new UserAccount();
+    @FXML
+    public static UserAccount currAccount = new UserAccount();
 
     @FXML
     private AnchorPane logInWindow;

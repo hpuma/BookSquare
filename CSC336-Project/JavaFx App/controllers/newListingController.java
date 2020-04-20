@@ -126,11 +126,14 @@ public class newListingController {
             String isbn = ISBNTextField.getText();
             String condition = getSingleButton(new RadioButton[]{newButton, goodButton, acceptableButton});
             double Price = Double.parseDouble(priceTextField.getText()); //Will give you a nasty error if not handled!
+            // GET IMAGE PATH SOMEHOW
 
             // When all the data is VALID, Condition is valid and text is not empty!
             if (title.isEmpty() ^ author.isEmpty() ^ isbn.isEmpty() ^ Double.isNaN(Price) ^ !condition.isEmpty()){
                 // Generating the required query to find a duplicate listing.
-                int searchUserId = 10;
+                int searchUserId = loginController.currAccount.getUserID();
+                System.out.println(searchUserId);
+
                 executeScript listingQuery = new executeScript();
                 String findListingQuery = String.format("SELECT * FROM \n" +
                         "(Listings JOIN Product \n" +
@@ -142,20 +145,19 @@ public class newListingController {
 
                 // Executing the query to find a duplicate.
                 try(ResultSet listingSearch =  listingQuery.executeStatement(findListingQuery)){
-                    if(listingSearch != null){
+                    if(listingSearch.next()){
                         System.out.println("FOUND BOOK");
                         System.out.println(listingSearch.getString("ListingID") +"\t" +
                                 listingSearch.getInt("UserID") +"\t"+
                                 listingSearch.getString("ISBN")+"\t"+
                                 listingSearch.getBigDecimal("Price"));
                     }
-
-                } catch (SQLException ignored){
-                    // ADD THE ITEM HERE
-
+                    // ADD THE ITEM HERE, SET ADD QUERIES HERE.
+                    System.out.println("BOOK NOT FOUND");
 
 
-                }
+
+                } catch (SQLException ex){ ex.printStackTrace(); }
             } else{ System.out.println("INVALID DATA "); }
         } catch (NullPointerException ex){
             System.out.println("UNACCEPTABLE PRICE");
