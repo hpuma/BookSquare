@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.beans.Observable;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -471,11 +472,23 @@ public class BookSquareController implements Initializable {
                 System.out.println("TEST:: Getting a closer look at the book listing...");
                 listingViewController listingViewController = Loader.getController();
 //                Sets the information for the pop up after clicking on a listing.
-                listingViewController.setSellerLabels("Book", "Author", "ISBN", "name", "userId", "email", "phone");
-                Parent p = Loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(p));
-                stage.show();
+
+                // Getting the selected rows and transferring for display.
+                TableView.TableViewSelectionModel<ProductListing> selectionModel = Listings_Table.getSelectionModel();
+                ObservableList<ProductListing> selectedData = selectionModel.getSelectedItems();
+                // DEBUGGING
+                int selectedSize = selectedData.size();
+                System.out.println("Selected Listing Size:"+ selectedSize);
+                // MAKING SURE WE ONLY SELECTED ONE LISTING
+                if (selectedSize == 1){
+                    ProductListing s = selectedData.get(0);
+                    listingViewController.setSellerLabels(s.getListingID(),s.getTitle(),s.getISBN(),s.getTimePosted());
+                    Parent p = Loader.getRoot();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(p));
+                    stage.show();
+                }else{  System.out.println("MORE THAN ONE ITEM SELECTED"); }
+
             }
         });
     }

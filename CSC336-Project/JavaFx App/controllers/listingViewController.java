@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 
 
 public class listingViewController {
+    @FXML
+    private Label postDate;
 
     @FXML
     private Label bookTitle;
@@ -28,13 +30,9 @@ public class listingViewController {
     private Label sellerPhone;
 
 
-    public void setSellerLabels(String title, String author, String ISBN, String userFullName, String userID, String email, String phone){
+    public void setSellerLabels(int ListingID, String title, String isbn, String timePosted){
         bookTitle.setText(title);
-        bookAuthor.setText(author);
-        bookISBN.setText(ISBN);
-        sellerName.setText(userFullName);
-        sellerID.setText(userID);
-        sellerEmail.setText(email);
-        sellerPhone.setText(phone);
+        bookISBN.setText(isbn);
+        postDate.setText(timePosted);
     }
 }

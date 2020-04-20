@@ -76,20 +76,4 @@ public class executeScript {
         return null;
     }
 
-    // This fully executes an SQL query to a specific table.
-    public ResultSet executeStatement(String SQLQUERY){
-        Connection c = dbConnection.connect();
-        PreparedStatement ps = null;
-        ResultSet querySet = null;
-        try{
-            ps = c.prepareStatement(SQLQUERY);
-            querySet = ps.executeQuery();
-            return querySet;
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-        return null;
-    }
-
-
 }
