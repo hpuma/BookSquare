@@ -80,7 +80,7 @@ public class newListingController {
         newListing.getChildren().setAll(p);
     }
 // Checks to see if there is a single radio button selected then returns the condition value
-// If somehow, none or all are selected then we return an empty string.
+// If somehow, none or all are selected then we return an empty string meaning that there is a non-valid condition.
     private String getSingleButton(RadioButton[] buttonList){
         int buttonActive = 0;
         String message = "";
@@ -94,8 +94,7 @@ public class newListingController {
         }
         return buttonActive == 1?message:"" ;
     }
-
-    // Updating the radio buttons when pressed.
+    // Updating the radio buttons when pressed so only one button is selected at a time.
     @FXML
     void setNewButton(ActionEvent e){
         acceptableButton.setSelected(false);
@@ -116,35 +115,46 @@ public class newListingController {
     }
     // Handle when create listing is pressed, I have not queried the database yet or added a list.
     @FXML
-    void setCreateListingButton(ActionEvent e)throws IOException{
+    void setCreateListingButton(ActionEvent e){
         try{
+            // Retrieving all the input data.
             String title = titleTextField.getText();
             String author = authorTextField.getText();
-            String ISBN = ISBNTextField.getText();
-            String Condition = getSingleButton(new RadioButton[]{goodButton, newButton, acceptableButton});
-            Double Price = Double.valueOf(priceTextField.getText()); //Will give you a nasty error if not handled!
+            String isbn = ISBNTextField.getText();
+            String condition = getSingleButton(new RadioButton[]{newButton, goodButton, acceptableButton});
+            double Price = Double.parseDouble(priceTextField.getText()); //Will give you a nasty error if not handled!
 
             // When all the data is VALID, Condition is valid and text is not empty!
-            if (title.isEmpty() ^ author.isEmpty() ^ ISBN.isEmpty() ^ Price.isNaN() ^ !Condition.isEmpty()){
-                System.out.println(title+"\n"+author+"\n"+ISBN+"\n"+Condition);
-                System.out.println(Price);
+            if (title.isEmpty() ^ author.isEmpty() ^ isbn.isEmpty() ^ Double.isNaN(Price) ^ !condition.isEmpty()){
+                // Generating the required query to find a duplicate listing.
                 int searchUserId = 10;
-                String findListingQuery = String.format("SELECT * FROM (Listings JOIN Product ON Listings.ListingID = Product.ListingID) WHERE UserID='%d' AND ISBN ='%s';",searchUserId,ISBN);
                 executeScript listingQuery = new executeScript();
-                ResultSet listingSearch =  listingQuery.executeStatement(findListingQuery);
+                String findListingQuery = String.format("SELECT * FROM \n" +
+                        "(Listings JOIN Product \n" +
+                        "ON Listings.ListingID = Product.ListingID)\n" +
+                        "WHERE Listings.UserID =%d " +
+                        "AND Product.ISBN ='%s' " +
+                        "AND Product.Cond='%s'" +
+                        "AND Listings.Status=1;",searchUserId,isbn,condition.replaceAll("\\s",""));
 
-                if (listingSearch != null){
-                    System.out.println("HEYOOO");
-                }else{
-                    System.out.println("Not Here");
+                // Executing the query to find a duplicate.
+                try(ResultSet listingSearch =  listingQuery.executeStatement(findListingQuery)){
+                    if(listingSearch != null){
+                        System.out.println("FOUND BOOK");
+                        System.out.println(listingSearch.getString("ListingID") +"\t" +
+                                listingSearch.getInt("UserID") +"\t"+
+                                listingSearch.getString("ISBN")+"\t"+
+                                listingSearch.getBigDecimal("Price"));
+                    }
+
+                } catch (SQLException ignored){
+                    // ADD THE ITEM HERE
+
+
+
                 }
-
-
-            }else{
-                System.out.println("INVALID DATA ");
-            }
-        }
-        catch (NullPointerException ex){
+            } else{ System.out.println("INVALID DATA "); }
+        } catch (NullPointerException ex){
             System.out.println("UNACCEPTABLE PRICE");
             ex.printStackTrace();
         }
