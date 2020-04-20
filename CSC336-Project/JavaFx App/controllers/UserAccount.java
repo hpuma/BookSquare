@@ -13,6 +13,9 @@ public class UserAccount {
     private String Pass;
 
     // Constructor that queries an account based on important credentials.
+    public UserAccount(){
+
+    }
     public UserAccount(String UserEmail, String UserPassword){
       try{
           if(this.updateAccount(UserEmail, UserPassword)){
@@ -27,7 +30,7 @@ public class UserAccount {
     }
 
     // Update the User details based on the Users login info.
-    private boolean updateAccount(String UserEmail, String UserPassword) throws Exception {
+    public boolean updateAccount(String UserEmail, String UserPassword) throws Exception {
         String LoginDetails = String.format("SELECT * FROM Users WHERE Email=\'%s\'"+" AND Pass=\'%s\';",UserEmail, UserPassword);
         executeScript runQuery = new executeScript();
         try (ResultSet AccountInfo = runQuery.executeStatement("users",LoginDetails)){

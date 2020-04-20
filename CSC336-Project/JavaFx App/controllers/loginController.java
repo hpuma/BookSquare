@@ -18,6 +18,7 @@ import DatabaseFiles.Login_Obj;
 import javafx.stage.Stage;
 
 public class loginController {
+    public UserAccount currAccount = new UserAccount();
 
     @FXML
     private AnchorPane logInWindow;
@@ -75,6 +76,8 @@ public class loginController {
 
                 BookSquareController BookSquareController = loader.getController();//obtain login info to bring to next controller
                 BookSquareController.getLoginInfo(email, password);
+                currAccount.updateAccount(email, password);
+                System.out.println(currAccount.getUserID());
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
