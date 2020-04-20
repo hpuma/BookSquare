@@ -469,6 +469,10 @@ public class BookSquareController implements Initializable {
                     e.printStackTrace();
                 }
                 System.out.println("TEST:: Getting a closer look at the book listing...");
+                
+                listingViewController listingViewController = Loader.getController();
+//                Sets the information for the pop up after clicking on a listing.
+                listingViewController.setSellerLabels("Book", "Author", "ISBN", "name", "userId", "email", "phone");
                 Parent p = Loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
