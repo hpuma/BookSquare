@@ -22,7 +22,7 @@
    <children>
       <VBox minHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0">
          <children>
-            <ImageView fx:id="storeLogo" fitHeight="64.0" fitWidth="161.0">
+            <ImageView fx:id="storeLogo" fitHeight="64.0" fitWidth="161.0" onMouseClicked="#logoClicked">
                <image>
                   <Image url="@../images/bookSquare.png" />
                </image>
