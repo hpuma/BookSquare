@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -14,6 +15,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -153,10 +156,15 @@ public class newListingController {
         }
     }
     @FXML
-    void uploadListingImage(ActionEvent event) {
-    	System.out.println("boo");
-    	FileChooser fileChooser = new FileChooser();
+    void uploadListingImage(ActionEvent event) throws MalformedURLException {
+    	//System.out.println("boo");
+    	FileChooser fileChooser = new FileChooser();//opens file explorer
     	File selectedFile = fileChooser.showOpenDialog(newListing.getScene().getWindow());
+    	String imagePath = selectedFile.getAbsolutePath();//get file path
+    	System.out.println(imagePath);
+
+        Image image = new Image(selectedFile.toURI().toString());//change image to selected image
+        uploadImage.setImage(image);
 
     }
 }

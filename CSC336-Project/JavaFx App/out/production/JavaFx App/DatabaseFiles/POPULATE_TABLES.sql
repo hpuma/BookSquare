@@ -68,11 +68,11 @@ VALUES
 INSERT INTO 
     Product(ISBN, ListingID, Cond, Price)
 VALUES
-    ('ISBN1', 1, 'VeryGood', 21.99),
+    ('ISBN1', 1, 'LikeNew', 21.99),
     ('ISBN2', 2, 'Good', 22.99),
-    ('ISBN3', 3, 'Fair', 23.99),
-    ('ISBN4', 4, 'Fine', 24.99),
-    ('ISBN5', 5, 'Acceptable', 25.99);
+    ('ISBN3', 3, 'Good', 23.99),
+    ('ISBN4', 4, 'Acceptable', 24.99),
+    ('ISBN5', 5, 'LikeNew', 25.99);
 
 
 
