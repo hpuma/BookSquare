@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import DatabaseFiles.dbConnection;
 import org.apache.ibatis.javassist.Loader;
+import org.w3c.dom.Text;
 
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ import java.util.logging.Logger;
 
 
 public class BookSquareController implements Initializable {
-    public UserAccount currAccount = new UserAccount();
+    @FXML
+    public static UserAccount currAccount = new UserAccount();
     public String currUserEmail;
     public String currUserPassword;
 

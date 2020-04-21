@@ -29,7 +29,7 @@
             </Pane>
             <Pane minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <Label layoutX="24.0" layoutY="11.0" text="Username">
+                  <Label layoutX="24.0" layoutY="11.0" text="UserID">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -38,12 +38,12 @@
             </Pane>
             <Pane minHeight="-Infinity" prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField fx:id="userID" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="userID" layoutX="25.0" layoutY="2.0" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="400.0">
                <children>
-                  <Label layoutX="24.0" layoutY="-1.0" text="First Name">
+                  <Label layoutX="24.0" layoutY="-4.0" text="First Name">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -52,12 +52,12 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField fx:id="firstName" layoutX="25.0" layoutY="-1.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="firstName" layoutX="25.0" layoutY="-8.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="400.0">
                <children>
-                  <Label layoutX="24.0" layoutY="3.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" text="Last Name">
+                  <Label layoutX="24.0" layoutY="4.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" text="Last Name">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -66,7 +66,7 @@
             </Pane>
             <Pane prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <TextField fx:id="lastName" layoutX="25.0" layoutY="-1.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" />
+                  <TextField fx:id="lastName" layoutX="25.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="350.0" />
                </children>
             </Pane>
             <GridPane minHeight="-Infinity">
