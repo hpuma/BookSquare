@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +16,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class SignUpController {
-
+    @FXML
+    private Button goBack;
     @FXML
     private AnchorPane signUpWindow;
 
@@ -58,9 +60,13 @@ public class SignUpController {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/BookSquare.fxml"));
             signUpWindow.getChildren().setAll(p);
             InsertTableData i = new InsertTableData();
-            i.insertUsers(Integer.parseInt(userID.getText()), firstName.getText(), lastName.getText(), email.getText(), phone.getText(), pass.getText());
+            i.insertUsers(Integer.parseInt(userID.getText()), firstName.getText(), lastName.getText(), phone.getText(), email.getText(), pass.getText());
         }
 
+    }
+    public void backToLogin(ActionEvent actionEvent) throws IOException {
+        AnchorPane p = FXMLLoader.load(getClass().getResource("/pages/login.fxml"));
+        signUpWindow.getChildren().setAll(p);
     }
 }
 
