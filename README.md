@@ -7,8 +7,8 @@ CSC 336 Project 1: Peter, Daniel, Julia and Henry
 - Any sqlite-jdbc library. i.e. ```sqlite-jdbc-3.30.1 ```
 
 #### Login with the following basic credentials:
-- Email:    Email1
-- Password: Pass
+- Email:   ``` Email1 ```
+- Password: ``` Pass ```
 
 #### If you are having issues with your modules, follow these steps:
 - Go to "Run" tab.
