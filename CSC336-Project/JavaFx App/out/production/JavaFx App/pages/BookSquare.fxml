@@ -19,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="748.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookSquareController">
+<AnchorPane prefHeight="748.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookSquareController">
     <children>
         <VBox fx:id="homeWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;">
             <children>
@@ -162,16 +162,11 @@
                             <content>
                                 <AnchorPane id="Content" minHeight="-Infinity" minWidth="-1.0" prefHeight="731.0" prefWidth="955.0" style="-fx-background-color: #F1D5FF;">
                                     <children>
-                                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" wrapText="false">
-                                            <font>
-                                                <Font size="18.0" fx:id="x1" />
-                                            </font>
-                                            <textFill>
-                                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
-                                            </textFill>
-                                        </Label>
-                                        <Button fx:id="closeUp" layoutX="44.0" layoutY="53.0" mnemonicParsing="false" onAction="#moreBookInfo" text="(Click for a close-up/more details about the book" />
-                              <TableView fx:id="Listings_Table" layoutX="44.0" layoutY="109.0" prefHeight="574.0" prefWidth="801.0">
+                                        <Button fx:id="closeUp" layoutX="26.0" layoutY="7.0" mnemonicParsing="false" onAction="#moreBookInfo" style="-fx-background-color: #F1D5FF;" text="Results (Click-on an entry for more details)">
+                                 <font>
+                                    <Font name="Century Gothic Bold" size="27.0" />
+                                 </font></Button>
+                              <TableView fx:id="Listings_Table" layoutX="44.0" layoutY="59.0" prefHeight="574.0" prefWidth="801.0">
                                 <columns>
                                   <TableColumn fx:id="listid_col" prefWidth="86.00000381469727" text="ListingID" />
                                     <TableColumn fx:id="imgid_col" minWidth="0.0" prefWidth="102.00003051757812" text="ImageID" />
