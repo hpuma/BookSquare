@@ -82,6 +82,16 @@ public class BookSquareController implements Initializable {
     private RadioButton new_time;
 
     @FXML
+    private RadioButton clearPrice;
+
+    @FXML
+    private RadioButton clearCondition;
+
+    @FXML
+    private RadioButton clearTime;
+
+
+    @FXML
     private Font x1;
 
     @FXML
@@ -169,6 +179,9 @@ public class BookSquareController implements Initializable {
         if (this.priceGroup.getSelectedToggle().equals(this.high_p)) {
             this.tog.setPrice(2);
         }
+        if (this.priceGroup.getSelectedToggle().equals(this.clearPrice)){
+            this.tog.setPrice(0);
+        }
     }
 
     @FXML
@@ -182,6 +195,9 @@ public class BookSquareController implements Initializable {
         if (this.conditionGroup.getSelectedToggle().equals(this.accept_con)) {
             this.tog.setCondition(1);
         }
+        if (this.conditionGroup.getSelectedToggle().equals(this.clearCondition)) {
+            this.tog.setCondition(0);
+        }
     }
 
     @FXML
@@ -191,6 +207,10 @@ public class BookSquareController implements Initializable {
         }
         if (this.timeGroup.getSelectedToggle().equals(this.new_time)) {
             this.tog.setTime(2);
+        }
+
+        if (this.timeGroup.getSelectedToggle().equals(this.clearTime)) {
+            this.tog.setTime(0);
         }
     }
 
