@@ -2,7 +2,6 @@ package controllers;
 
 import DatabaseFiles.InsertTableData;
 import DatabaseFiles.dbConnection;
-import DatabaseFiles.executeScript;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -51,8 +47,6 @@ public class newListingController {
     private AnchorPane newListing;
     @FXML
     private TextField searchTextField;
-    @FXML
-    private Button searchButton;
     @FXML
     private Button logOutButton;
     @FXML
@@ -196,6 +190,7 @@ public class newListingController {
                         // Creating the ListingID. Hashcode creates a large number for listingID :/
                         String hashMaker = isbn + currentUserID + price;
                         int newListingID = Math.abs(hashMaker.hashCode());
+                        System.out.println("NEW LISTING CREATED:"+newListingID);
 
                         // Inserting to all the tables.
                         InsertTableData.insertListings(newListingID, currentUserID, currentTime, true);
@@ -214,10 +209,10 @@ public class newListingController {
             changeConfirm("ERROR CREATING THE LISTING",true);
         } catch (NumberFormatException ex) {
             System.out.println("PRICE IS NOT A VALID ENTRY");
-            changeConfirm("PRICE IS NOT VALID A VALID ENTRY",true);
+            changeConfirm("PRICE IS NOT A VALID ENTRY",true);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
-            changeConfirm("ERROR CREATING THE LISTING",true);
+            changeConfirm("ERROR IN CREATING THE LISTING",true);
         }
     }
     @FXML
