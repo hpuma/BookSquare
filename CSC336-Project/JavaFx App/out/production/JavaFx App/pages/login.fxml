@@ -73,7 +73,7 @@
             <Image url="@../images/index.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="982.0" layoutY="777.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by MangoDB">
+      <Text fill="WHITE" layoutX="963.0" layoutY="776.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by MangoDB">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
