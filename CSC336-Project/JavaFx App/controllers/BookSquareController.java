@@ -118,11 +118,7 @@ public class BookSquareController implements Initializable {
     @FXML
 //    Opens up a new, smaller window showcasing more information about the book.
     void moreBookInfo(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/pages/listingView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        System.out.println("");
     }
 
     @FXML
