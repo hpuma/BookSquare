@@ -1,4 +1,4 @@
-# CSC336-Project
+# BookSquare
 CSC 336 Project 1: Peter, Daniel, Julia and Henry
 
 #### Before running, be sure to include the following external libraries to the Project Structure:
